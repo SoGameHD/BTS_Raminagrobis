@@ -28,18 +28,10 @@ namespace Raminagrobis.WPF
             InitializeComponent();
         }
 
-        #region LoadPage
-        private async void LoadPage(object sender, RoutedEventArgs e)
-        {
-            var apiclient = new Client("https://localhost:/44345", new HttpClient());
-            var adherent = await apiclient.AdherentsGetAsync();
-        }
-        #endregion
-
         #region BtnInsert
         private void BtnInsert(object sender, RoutedEventArgs e)
         {
-            var apiclient = new Client("https://localhost:/44345", new HttpClient());
+            var apiclient = new Client("https://localhost:44345/", new HttpClient());
             Adherent_DTO adherent_DTO = new Adherent_DTO();
             adherent_DTO.Societe = InputSociete.Text;
             adherent_DTO.Civilite = InputCivilite.AcceptsReturn;

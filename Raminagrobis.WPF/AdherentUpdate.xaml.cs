@@ -40,7 +40,7 @@ namespace Raminagrobis.WPF
         #region BtnUpdate
         public void BtnUpdate(object sender, RoutedEventArgs e)
         {
-            var apiclient = new Client("https://localhost:44355/", new HttpClient());
+            var apiclient = new Client("https://localhost:44345/", new HttpClient());
             Adherent_DTO adherent = new Adherent_DTO()
             {
                 ID = Int32.Parse(this.UpdateID.Text),

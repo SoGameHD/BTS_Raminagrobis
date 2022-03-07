@@ -6,9 +6,16 @@
       xmlns:local="clr-namespace:Raminagrobis.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Paniers">
+      Title="Paniers" Loaded="LoadPage">
 
     <Grid>
-        
+        <ListView Name="lvPaniers" Margin="0,35,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Libelle" Width="160" DisplayMemberBinding="{Binding Libelle}" />
+                    <GridViewColumn Header="ID" Width="160" DisplayMemberBinding="{Binding ID}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

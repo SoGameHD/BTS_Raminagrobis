@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Raminagrobis.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Produits">
+      Title="Produits" Loaded="LoadPage">
 
     <Grid>
         <ListView Name="lvProduits" Margin="0,35,0,0">

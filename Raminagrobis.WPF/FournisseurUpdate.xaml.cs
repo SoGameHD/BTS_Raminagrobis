@@ -41,7 +41,7 @@ namespace Raminagrobis.WPF
         #region BtnUpdate 
         public void BtnUpdate(object sender, RoutedEventArgs e)
         {
-            var apiclient = new Client("https://localhost:44355/", new HttpClient());
+            var apiclient = new Client("https://localhost:44345/", new HttpClient());
             Fournisseur_DTO fournisseur = new Fournisseur_DTO()
             {
                 ID = Int32.Parse(this.UpdateID.Text),
