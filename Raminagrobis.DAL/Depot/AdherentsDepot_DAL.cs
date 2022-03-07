@@ -15,20 +15,21 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT societe, civilite, nom, prenom, email, date_adhesion, actif FROM Adherents";
+            commande.CommandText = "SELECT ID, societe, civilite, nom, prenom, email, date_adhesion, actif FROM Adherents";
             var reader = commande.ExecuteReader();
 
             var listeAdherents = new List<Adherent_DAL>();
 
             while (reader.Read())
             {
-                var adherent = new Adherent_DAL(reader.GetString(0),
-                                        reader.GetBoolean(1),
-                                        reader.GetString(2),
+                var adherent = new Adherent_DAL(reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetBoolean(2),
                                         reader.GetString(3),
                                         reader.GetString(4),
-                                        reader.GetDateTime(5),
-                                        reader.GetBoolean(6)
+                                        reader.GetString(5),
+                                        reader.GetDateTime(6),
+                                        reader.GetBoolean(7)
                                         );
 
                 listeAdherents.Add(adherent);
