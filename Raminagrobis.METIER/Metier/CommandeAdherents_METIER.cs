@@ -12,7 +12,7 @@ namespace Raminagrobis.METIER.Metier
     {
         public int ID_adherent { get; set; }
         public int ID_panier { get; set; }
-        private int ID { get; set; }
+        public int ID { get; set; }
 
         public CommandeAdherents_METIER(int id_adherent, int id_panier) => (ID_adherent, ID_panier) = (id_adherent, id_panier);
         public CommandeAdherents_METIER(int id, int id_adherent, int id_panier) => (ID, ID_adherent, ID_panier) = (id, id_adherent, id_panier);
