@@ -85,7 +85,7 @@ namespace Raminagrobis.DAL.Depot
             commande.Parameters.Add(new SqlParameter("@Nom", adherent.Nom));
             commande.Parameters.Add(new SqlParameter("@Prenom", adherent.Prenom));
             commande.Parameters.Add(new SqlParameter("@Email", adherent.Email));
-            commande.Parameters.Add(new SqlParameter("@Date_adhesion", adherent.Date_adhesion));
+            commande.Parameters.Add(new SqlParameter("@Date_adhesion", DateTime.Now));
             commande.Parameters.Add(new SqlParameter("@Actif", adherent.Actif));
 
             var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());

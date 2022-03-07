@@ -25,7 +25,7 @@ namespace Raminagrobis.METIER.Metier
         #region Insert
         public void Insert()
         {
-            Adherent_DAL Adherent = new Adherent_DAL(Societe, Civilite, Nom, Prenom, Email, Date_adhesion, Actif);
+            Adherent_DAL Adherent = new Adherent_DAL(Societe, Civilite, Nom, Prenom, Email, DateTime.Now, Actif);
             var depotAdherent = new AdherentDepot_DAL();
             Adherent = depotAdherent.Insert(Adherent);
 
