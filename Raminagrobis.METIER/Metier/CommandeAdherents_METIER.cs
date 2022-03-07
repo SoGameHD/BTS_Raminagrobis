@@ -15,6 +15,7 @@ namespace Raminagrobis.METIER.Metier
         private int ID { get; set; }
 
         public CommandeAdherents_METIER(int id_adherent, int id_panier) => (ID_adherent, ID_panier) = (id_adherent, id_panier);
+        public CommandeAdherents_METIER(int id, int id_adherent, int id_panier) => (ID, ID_adherent, ID_panier) = (id, id_adherent, id_panier);
 
         #region Insert
         public void Insert()
