@@ -15,7 +15,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id_panier, quantite, id_produit FROM LignesGlobal";
+            commande.CommandText = "SELECT id, id_panier, quantite, id_produit FROM LignesGlobal";
             var reader = commande.ExecuteReader();
 
             var listeGlobal = new List<LignesGlobal_DAL>();
@@ -24,7 +24,8 @@ namespace Raminagrobis.DAL.Depot
             {
                 var lignesGlobal = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
-                                        reader.GetInt32(2)
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3)
                                         );
 
                 listeGlobal.Add(lignesGlobal);
