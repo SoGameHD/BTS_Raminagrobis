@@ -27,24 +27,6 @@ namespace Raminagrobis.METIER.Services
         }
         #endregion
 
-        #region GetByID_produit
-        public LignesAdherents_METIER GetByID_produit(int id_produit)
-        {
-            var depot = new LignesAdherentsDepot_DAL();
-            var input = depot.GetByID_produit(id_produit);
-            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_commande, input.ID_ligne_global);
-        }
-        #endregion
-
-        #region GetByID_commande
-        public LignesAdherents_METIER GetByID_commande(int id_commande)
-        {
-            var depot = new LignesAdherentsDepot_DAL();
-            var input = depot.GetByID_commande(id_commande);
-            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_commande, input.ID_ligne_global);
-        }
-        #endregion
-
         #region Insert
         public void Insert(LignesAdherents_DTO input)
         {
@@ -64,9 +46,12 @@ namespace Raminagrobis.METIER.Services
         #endregion
 
         #region Delete
-        public void Delete(int id_produit, int id_commande)
+        public void Delete(int id)
         {
-            depot.Delete(id_produit, id_commande);
+            LignesAdherents_DAL lignesAdherents;
+            LignesAdherentsDepot_DAL depot = new LignesAdherentsDepot_DAL();
+            lignesAdherents = depot.GetByID(id);
+            depot.Delete(lignesAdherents);
         }
         #endregion
     }
