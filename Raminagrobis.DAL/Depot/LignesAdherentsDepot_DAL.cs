@@ -15,7 +15,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id, id_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent";
+            commande.CommandText = "SELECT ID, id_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent";
             var reader = commande.ExecuteReader();
 
             var listeAdherents = new List<LignesAdherents_DAL>();
@@ -74,7 +74,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent WHERE ID_ligne_global=@ID_ligne_global";
+            commande.CommandText = "SELECT ID_ligne_global, id_produit, id_adherent, quantite FROM LignesAdherent WHERE ID_ligne_global=@ID_ligne_global";
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", ID_ligne_global));
             var reader = commande.ExecuteReader();
 
@@ -105,7 +105,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent WHERE ID_adherent=@ID_adherent";
+            commande.CommandText = "SELECT ID_adherent, id_produit, id_ligne_global, quantite FROM LignesAdherent WHERE ID_adherent=@ID_adherent";
             commande.Parameters.Add(new SqlParameter("@ID_adherent", ID_adherent));
             var reader = commande.ExecuteReader();
 

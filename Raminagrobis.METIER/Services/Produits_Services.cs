@@ -55,8 +55,8 @@ namespace Raminagrobis.METIER.Services
         #region Delete
         public void Delete(int id)
         {
-            Fournisseurs_DAL produits;
-            FournisseursDepot_DAL depot = new FournisseursDepot_DAL();
+            Produits_DAL produits;
+            ProduitsDepot_DAL depot = new ProduitsDepot_DAL();
             produits = depot.GetByID(id);
             depot.Delete(produits);
         }

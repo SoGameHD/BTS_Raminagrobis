@@ -15,7 +15,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id, annee, num_semaine, actif FROM LignesGlobal";
+            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal";
             var reader = commande.ExecuteReader();
 
             var listeGlobal = new List<LignesGlobal_DAL>();
@@ -72,9 +72,9 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal WHERE annee=@annee AND num_semaine=num_semaine";
-            commande.Parameters.Add(new SqlParameter("@annee", annee));
-            commande.Parameters.Add(new SqlParameter("@num_semaine", num_semaine));
+            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal WHERE annee=@Annee AND Num_semaine=Num_semaine";
+            commande.Parameters.Add(new SqlParameter("@Annee", annee));
+            commande.Parameters.Add(new SqlParameter("@Num_semaine", num_semaine));
             var reader = commande.ExecuteReader();
 
             LignesGlobal_DAL listeGlobal;
