@@ -18,36 +18,5 @@ namespace Raminagrobis.METIER.Metier
 
         public Fournisseurs_METIER(string societe, bool civilite, string nom, string prenom, string email, string adresse, bool actif) => (Societe, Civilite, Nom, Prenom, Email, Adresse, Actif) = (societe, civilite, nom, prenom, email, adresse, actif);
         public Fournisseurs_METIER(int id, string societe, bool civilite, string nom, string prenom, string email, string adresse, bool actif) => (ID, Societe, Civilite, Nom, Prenom, Email, Adresse, Actif) = (id, societe, civilite, nom, prenom, email, adresse, actif);
-
-        #region Insert
-        public void Insert()
-        {
-            Fournisseurs_DAL fournisseur = new Fournisseurs_DAL(Societe, Civilite, Nom, Prenom, Email, Adresse, Actif);
-
-            var depotfournisseur = new FournisseursDepot_DAL();
-
-            fournisseur = depotfournisseur.Insert(fournisseur);
-
-            ID = fournisseur.ID;
-        }
-        #endregion
-
-        #region Delete
-        public void Delete()
-        {
-            Fournisseurs_DAL fournisseur = new Fournisseurs_DAL(ID, Societe, Civilite, Nom, Prenom, Email, Adresse, Actif);
-            var depotfournisseur = new FournisseursDepot_DAL();
-            depotfournisseur.Delete(fournisseur);
-        }
-        #endregion
-
-        #region Update
-        public void Update()
-        {
-            Fournisseurs_DAL fournisseur = new Fournisseurs_DAL(ID, Societe, Civilite, Nom, Prenom, Email, Adresse, Actif);
-            var depotfournisseur = new FournisseursDepot_DAL();
-            depotfournisseur.Update(fournisseur);
-        }
-        #endregion
     }
 }

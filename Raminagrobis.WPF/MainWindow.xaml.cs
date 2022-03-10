@@ -30,16 +30,8 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region LoadPage
-        private void LoadPage(object sender, RoutedEventArgs e)
-        {
-            var apiclient = new Client("https://localhost:/44345", new HttpClient());
-            GestionnaireDeFenetres.MainWindow = this;
-        }
-        #endregion
-
-        #region BtnAdherent
-        private void BtnAdherent(object sender, RoutedEventArgs e)
+        #region BtnAdherentList
+        private void BtnAdherentList(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null)
             {
@@ -49,8 +41,55 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region BtnFournisseur
-        private void BtnFournisseur(object sender, RoutedEventArgs e)
+        #region BtnAdherentInsert
+        private void BtnAdherentInsert(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.AdherentInsert == null)
+            {
+                GestionnaireDeFenetres.AdherentInsert = new AdherentInsert();
+            }
+            Main.Navigate(GestionnaireDeFenetres.AdherentInsert);
+        }
+        #endregion
+
+        #region BtnAdherentUpdate
+        private void BtnAdherentUdpate(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.lvAdherents.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez séléctionner un adhérent dans la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.AdherentUpdate == null)
+                {
+                    GestionnaireDeFenetres.AdherentUpdate = new AdherentUpdate((Adherent_DTO)GestionnaireDeFenetres.Adherents.lvAdherents.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.AdherentUpdate);
+            }
+        }
+        #endregion
+
+        #region BtnAdherentDelete
+        private void BtnAdherentDelete(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.lvAdherents == null)
+            {
+                MessageBox.Show("Veuillez afficher la liste des adhérents");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.AdherentDelete == null)
+                {
+                    GestionnaireDeFenetres.AdherentDelete = new AdherentDelete();
+                }
+                Main.Navigate(GestionnaireDeFenetres.AdherentDelete);
+            }
+        }
+        #endregion
+
+        #region BtnFournisseurList
+        private void BtnFournisseurList(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseur == null)
             {
@@ -60,99 +99,61 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region BtnPaniers
-        private void BtnPaniers(object sender, RoutedEventArgs e)
+        #region BtnFournisseurInsert
+        private void BtnFournisseurInsert(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.FournisseurInsert == null)
+            {
+                GestionnaireDeFenetres.FournisseurInsert = new FournisseurInsert();
+            }
+            Main.Navigate(GestionnaireDeFenetres.FournisseurInsert);
+        }
+        #endregion
+
+        #region BtnFournisseurUpdate
+        private void BtnFournisseurUdpate(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un fournisseur dans la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.FournisseurUpdate == null)
+                {
+                    GestionnaireDeFenetres.FournisseurUpdate = new FournisseurUpdate((Fournisseur_DTO)GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.FournisseurUpdate);
+            }
+        }
+        #endregion
+
+        #region BtnFournisseurDelete
+        private void BtnFournisseurDelete(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs == null)
+            {
+                MessageBox.Show("Veuillez afficher la liste des fournisseurs");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.FournisseurDelete == null)
+                {
+                    GestionnaireDeFenetres.FournisseurDelete = new FournisseurDelete();
+                }
+                Main.Navigate(GestionnaireDeFenetres.FournisseurDelete);
+            }
+        }
+        #endregion
+
+        #region BtnPaniersList
+        private void BtnPaniersList(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Paniers == null)
             {
                 GestionnaireDeFenetres.Paniers = new Paniers();
             }
             Main.Navigate(GestionnaireDeFenetres.Paniers);
-        }
-        #endregion
-
-        #region BtnProduits
-        private void BtnProduits(object sender, RoutedEventArgs e)
-        {
-            if (GestionnaireDeFenetres.Produits == null)
-            {
-                GestionnaireDeFenetres.Produits = new Produits();
-            }
-            Main.Navigate(GestionnaireDeFenetres.Produits);
-        }
-        #endregion
-
-        #region BtnInsert
-        private void BtnInsert(object sender, RoutedEventArgs e)
-        {
-            if (Main.Content != null)
-            {
-                if (Main.Content.GetType() == typeof(Adherents))
-                {
-                    Main.Content = new AdherentInsert();
-                }
-                if (Main.Content.GetType() == typeof(Fournisseur))
-                {
-                    Main.Content = new FournisseurInsert();
-                }
-                if (Main.Content.GetType() == typeof(Paniers))
-                {
-                    //Main.Content = new PaniersInsert();
-                }
-                if (Main.Content.GetType() == typeof(Produits))
-                {
-                    Main.Content = new ProduitsInsert();
-                }
-            }
-        }
-        #endregion
-
-        #region BtnUpdate
-        private void BtnUpdate(object sender, RoutedEventArgs e)
-        {
-            if (Main.Content != null)
-            {
-                if (Main.Content.GetType() == typeof(Adherents))
-                {
-                    Adherent_DTO adherent = (Adherent_DTO)GestionnaireDeFenetres.Adherents.lvAdherents.SelectedItem;
-                    Main.Content = new AdherentUpdate(adherent);
-                }
-                if (Main.Content.GetType() == typeof(Fournisseur))
-                {
-                    Fournisseur_DTO fournisseur = (Fournisseur_DTO)GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem;
-                    Main.Content = new FournisseurUpdate(fournisseur);
-                }
-                if (Main.Content.GetType() == typeof(Produits))
-                {
-                    Produits_DTO produits = (Produits_DTO)GestionnaireDeFenetres.Produits.lvProduits.SelectedItem;
-                    //Main.Content = new ProduitsUpdate(produits);
-                }
-            }
-        }
-        #endregion
-
-        #region BtnDelete
-        private void BtnDelete(object sender, RoutedEventArgs e)
-        {
-            if (Main.Content != null)
-            {
-                if (Main.Content.GetType() == typeof(Adherents))
-                {
-                    Main.Content = new AdherentDelete();
-                }
-                if (Main.Content.GetType() == typeof(Fournisseur))
-                {
-                    Main.Content = new FournisseurDelete();
-                }
-                if (Main.Content.GetType() == typeof(Paniers))
-                {
-                    //Main.Content = new PaniersDelete();
-                }
-                if (Main.Content.GetType() == typeof(Produits))
-                {
-                    Main.Content = new ProduitsDelete();
-                }
-            }
         }
         #endregion
     }

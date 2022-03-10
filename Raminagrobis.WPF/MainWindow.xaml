@@ -8,12 +8,28 @@
         Title="MainWindow" Height="450" Width="1202.8">
     <Grid>
         <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-            <Button Content="Page Adherents" MinWidth="100" Margin="10 0 0 0" Click="BtnAdherent"/>
-            <Button Content="Page Fournisseur" MinWidth="100" Margin="10 0 0 0" Click="BtnFournisseur"/>
-            <Button Content="Page Paniers" MinWidth="100" Margin="10 0 0 0" Click="BtnPaniers"/>
-            <Button Content="Page Produits" MinWidth="100" Margin="10 0 0 0" Click="BtnProduits"/>
-            <Button Content="Page Insert" MinWidth="100" Margin="250 0 0 0" Click="BtnInsert"/>
-            <Button Content="Page Delete" MinWidth="100" Margin="10 0 0 0" Click="BtnDelete"/>
+            <Menu Height="24" Width="800">
+                <MenuItem Header="Adherents" Height="20" Width="80">
+                    <MenuItem Header="Voir" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentList"/>
+                    <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentInsert" />
+                    <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentUdpate"/>
+                    <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentDelete"/>
+                    <!--<MenuItem Header="Commande" HorizontalAlignment="Left" Height="20" Width="160" Click="BtnAdherentUdpateCommande"/>-->
+                </MenuItem>
+                <MenuItem Header="Fournisseurs" Height="20" Width="80">
+                    <MenuItem Header="Voir" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurList"/>
+                    <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140"  Click="BtnFournisseurInsert" />
+                    <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurUdpate"/>
+                    <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurDelete"/>
+                    <!--<MenuItem Header="EnregistrerPrix" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnProduitsEnregistrer"/>
+                    <MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="Btn"/>-->
+                </MenuItem>
+                <MenuItem Header="Panier" Height="20" Width="69">
+                    <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>
+                    <!--<MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierCloturer"/>
+                    <MenuItem Header="Voir le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierView"/>-->
+                </MenuItem>
+            </Menu>
         </StackPanel>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden" Margin="0 35 0 0" />
     </Grid>

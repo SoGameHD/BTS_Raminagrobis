@@ -10,9 +10,15 @@ namespace Raminagrobis.WPF
     {
         static public MainWindow? MainWindow;
         static public Adherents? Adherents;
+        static public AdherentInsert? AdherentInsert;
+        static public AdherentUpdate? AdherentUpdate;
+        static public AdherentDelete? AdherentDelete;
         static public Fournisseur? Fournisseur;
+        static public FournisseurInsert? FournisseurInsert;
+        static public FournisseurUpdate? FournisseurUpdate;
+        static public FournisseurDelete? FournisseurDelete;
         static public Paniers? Paniers;
         static public Produits? Produits;
-        
+
     }
 }
