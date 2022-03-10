@@ -41,6 +41,7 @@ namespace Raminagrobis.WPF
             adherent_DTO.Actif = InputActif.AcceptsReturn;
 
             apiclient.AdherentsPostAsync(adherent_DTO);
+            MessageBox.Show("L'adhérent a été enregistré");
         }
         #endregion
     }

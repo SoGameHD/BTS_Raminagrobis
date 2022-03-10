@@ -57,8 +57,8 @@ namespace Raminagrobis.DAL.Depot
 
             if (reader.Read())
             {
-                listeAdherent = new LignesAdherents_DAL(reader.GetInt16(0),
-                                        reader.GetInt16(1)
+                listeAdherent = new LignesAdherents_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1)
                                         );
             }
             else
@@ -85,8 +85,8 @@ namespace Raminagrobis.DAL.Depot
 
             if (reader.Read())
             {
-                listeAdherent = new LignesAdherents_DAL(reader.GetInt16(0),
-                                        reader.GetInt16(1)
+                listeAdherent = new LignesAdherents_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1)
                                         );
             }
             else
@@ -145,6 +145,17 @@ namespace Raminagrobis.DAL.Depot
         #endregion
 
         #region Delete
+        public void Delete(int ID_produit, int ID_commande)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "DELETE FROM LignesAdherent WHERE ID_commande=@ID_commande and ID_produit=@ID_produit";
+            commande.Parameters.Add(new SqlParameter("@ID_produit", ID_produit));
+            commande.Parameters.Add(new SqlParameter("@ID_commande", ID_commande));
+            commande.ExecuteNonQuery();
+
+            DetruireConnexionEtCommande();
+        }
         public override void Delete(LignesAdherents_DAL lignesAdherent)
         {
             throw new NotImplementedException();

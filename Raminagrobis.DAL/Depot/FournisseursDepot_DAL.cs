@@ -15,20 +15,21 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs";
+            commande.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs";
             var reader = commande.ExecuteReader();
 
             var listeFournisseurs = new List<Fournisseurs_DAL>();
 
             while (reader.Read())
             {
-                var fournisseur = new Fournisseurs_DAL(reader.GetString(0),
-                                        reader.GetBoolean(1),
-                                        reader.GetString(2),
+                var fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetBoolean(2),
                                         reader.GetString(3),
                                         reader.GetString(4),
                                         reader.GetString(5),
-                                        reader.GetBoolean(6));
+                                        reader.GetString(6),
+                                        reader.GetBoolean(7));
 
                 listeFournisseurs.Add(fournisseur);
             }

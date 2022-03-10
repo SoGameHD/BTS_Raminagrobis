@@ -4,8 +4,6 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raminagrobis.DAL", "..\Raminagrobis.DAL\Raminagrobis.DAL.csproj", "{15225655-17C7-457D-98B3-594675F43DDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raminagrobis_Console", "Raminagrobis_Console.csproj", "{1A8A6EFE-4632-40AC-8D5D-C3AF2BCEC394}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raminagrobis.DTO", "..\RaminagrobisDTO\Raminagrobis.DTO.csproj", "{9BD28D54-E6B1-4C98-B49C-CAE7FB0A1881}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raminagrobis.METIER", "..\Raminagrobis.Metier\Raminagrobis.METIER.csproj", "{A729D737-514A-443C-814F-94D5C8676DCD}"
@@ -24,10 +22,6 @@ Global
 		{15225655-17C7-457D-98B3-594675F43DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15225655-17C7-457D-98B3-594675F43DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15225655-17C7-457D-98B3-594675F43DDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A8A6EFE-4632-40AC-8D5D-C3AF2BCEC394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A8A6EFE-4632-40AC-8D5D-C3AF2BCEC394}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A8A6EFE-4632-40AC-8D5D-C3AF2BCEC394}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A8A6EFE-4632-40AC-8D5D-C3AF2BCEC394}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BD28D54-E6B1-4C98-B49C-CAE7FB0A1881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BD28D54-E6B1-4C98-B49C-CAE7FB0A1881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD28D54-E6B1-4C98-B49C-CAE7FB0A1881}.Release|Any CPU.ActiveCfg = Release|Any CPU

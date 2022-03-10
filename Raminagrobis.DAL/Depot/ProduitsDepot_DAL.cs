@@ -15,17 +15,18 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT reference, libelle, marque, actif FROM Produits";
+            commande.CommandText = "SELECT id, reference, libelle, marque, actif FROM Produits";
             var reader = commande.ExecuteReader();
 
             var listeProduits = new List<Produits_DAL>();
 
             while (reader.Read())
             {
-                var produits = new Produits_DAL(reader.GetString(0),
+                var produits = new Produits_DAL(reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
-                                        reader.GetBoolean(3)
+                                        reader.GetString(3),
+                                        reader.GetBoolean(4)
                                         );
 
                 listeProduits.Add(produits);
