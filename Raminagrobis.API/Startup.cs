@@ -35,7 +35,11 @@ namespace Raminagrobis.API
             });
 
             services.AddSingleton(typeof(Adherents_Services), new Adherents_Services());
+            services.AddSingleton(typeof(CommandeAdherents_Services), new CommandeAdherents_Services());
             services.AddSingleton(typeof(Fournisseurs_Services), new Fournisseurs_Services());
+            services.AddSingleton(typeof(Liaison_Services), new Liaison_Services());
+            services.AddSingleton(typeof(LignesAdherents_Services), new LignesAdherents_Services());
+            services.AddSingleton(typeof(LignesGlobal_Services), new LignesGlobal_Services());
             services.AddSingleton(typeof(Paniers_Services), new Paniers_Services());
             services.AddSingleton(typeof(Produits_Services), new Produits_Services());
         }
