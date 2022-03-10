@@ -146,15 +146,5 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region BtnPaniersList
-        private void BtnPaniersList(object sender, RoutedEventArgs e)
-        {
-            if (GestionnaireDeFenetres.Paniers == null)
-            {
-                GestionnaireDeFenetres.Paniers = new Paniers();
-            }
-            Main.Navigate(GestionnaireDeFenetres.Paniers);
-        }
-        #endregion
     }
 }
