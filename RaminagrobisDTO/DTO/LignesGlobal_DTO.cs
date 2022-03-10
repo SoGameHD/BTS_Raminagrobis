@@ -8,9 +8,9 @@ namespace Raminagrobis.DTO.DTO
 {
     public class LignesGlobal_DTO
     {
-        public int ID_panier { get; set; }
-        public int Quantite { get; set; }
-        public int ID_produit { get; set; }
-        public int? ID { get; set; }
+        public int Num_semaine { get; set; }
+        public int Annee { get; set; }
+        public bool Actif { get; set; }
+        public int ID { get; set; }
     }
 }
