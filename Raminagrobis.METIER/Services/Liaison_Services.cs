@@ -27,12 +27,37 @@ namespace Raminagrobis.METIER.Services
         }
         #endregion
 
+        #region GetByID_produit
+        public Liaison_METIER GetByID_produit(int id_produit)
+        {
+            var depot = new LiaisonDepot_DAL();
+            var item = depot.GetByID_produit(id_produit);
+            return new Liaison_METIER(item.ID_produit, item.ID_fournisseur);
+        }
+        #endregion
+
+        #region GetByID_fournisseur
+        public Liaison_METIER GetByID_fournisseur(int id_fournisseur)
+        {
+            var depot = new LiaisonDepot_DAL();
+            var item = depot.GetByID_fournisseur(id_fournisseur);
+            return new Liaison_METIER(item.ID_produit, item.ID_fournisseur);
+        }
+        #endregion
+
         #region Insert
         public void Insert(Liaison_DTO input)
         {
             var liaison = new Liaison_DAL(input.ID_produit, input.ID_fournisseur);
             var depot = new LiaisonDepot_DAL();
             depot.Insert(liaison);
+        }
+        #endregion
+
+        #region Delete
+        public void Delete(int id_produit, int id_fournisseur)
+        {
+            depot.Delete(id_produit, id_fournisseur);
         }
         #endregion
 
