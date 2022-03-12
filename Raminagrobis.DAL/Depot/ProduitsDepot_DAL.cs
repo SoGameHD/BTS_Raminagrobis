@@ -63,6 +63,61 @@ namespace Raminagrobis.DAL.Depot
                 throw new Exception($"Aucune occurance à l'ID {ID} dans la table Produits");
             }
 
+            DetruireConnexionEtCommande();
+
+            return listeProduits;
+        }
+        #endregion
+
+        #region GetByIDFournisseur
+        public List<Produits_DAL> GetByIDFournisseur(int ID_fournisseur)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT id, libelle, marque, reference FROM produits INNER JOIN Liaison ON id = id_produit WHERE id_fournisseur = @ID_fournisseur";
+            commande.Parameters.Add(new SqlParameter("@ID_fournisseur", ID_fournisseur));
+            var reader = commande.ExecuteReader();
+
+            var listeProduits = new List<Produits_DAL>();
+
+            while (reader.Read())
+            {
+                var produits = new Produits_DAL(reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetString(2),
+                                        reader.GetString(3),
+                                        reader.GetBoolean(4)
+                                        );
+                listeProduits.Add(produits);
+            }
+
+            DetruireConnexionEtCommande();
+
+            return listeProduits;
+        }
+        #endregion
+
+        #region GetByReference
+        public List<Produits_DAL> GetByReference(string reference)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT id, reference, libelle, marque, actif FROM produits WHERE reference = @Reference";
+            commande.Parameters.Add(new SqlParameter("@Reference", reference));
+            var reader = commande.ExecuteReader();
+
+            var listeProduits = new List<Produits_DAL>();
+            
+            while (reader.Read())
+            {
+                var produits = new Produits_DAL(reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetString(2),
+                                        reader.GetString(3),
+                                        reader.GetBoolean(4)
+                                        );
+                listeProduits.Add(produits);
+            }
 
             DetruireConnexionEtCommande();
 
@@ -75,7 +130,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO Produits(reference, libelle, marque, actif) VALUES (@Reference, @Libelle, @Marque, @Actif); SELECT SCOPE_IDENTITY()";
+            commande.CommandText = "INSERT INTO Produits (reference, libelle, marque, actif) VALUES (@Reference, @Libelle, @Marque, @Actif); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@Reference", produits.Reference));
             commande.Parameters.Add(new SqlParameter("@Libelle", produits.Libelle));
             commande.Parameters.Add(new SqlParameter("@Marque", produits.Marque));

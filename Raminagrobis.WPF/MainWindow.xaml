@@ -23,7 +23,7 @@
                     <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurUdpate"/>
                     <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurDelete"/>
                     <!--<MenuItem Header="EnregistrerPrix" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnPrixEnregistrer"/>-->
-                    <!--<MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnFournisseurReference"/>-->
+                    <MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnFournisseurReference"/>
                 </MenuItem>
                 <!--<MenuItem Header="Panier" Height="20" Width="69">
                     <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>-->

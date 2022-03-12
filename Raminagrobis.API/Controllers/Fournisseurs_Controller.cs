@@ -78,5 +78,13 @@ namespace Raminagrobis.API.Controllers
             service.Delete(id);
         }
         #endregion
+
+        #region GetListProduitsByFournisseur
+        [HttpPost("catalogue/{id}")]
+        public void GetListProduitsByFournisseur(int id, List<string> csv_file)
+        {
+            service.GetListProduitsByFournisseur(id, csv_file);
+        }
+        #endregion
     }
 }
