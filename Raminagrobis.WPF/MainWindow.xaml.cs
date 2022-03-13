@@ -30,6 +30,7 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
+        #region BtnAdherent
         #region BtnAdherentList
         private void BtnAdherentList(object sender, RoutedEventArgs e)
         {
@@ -87,7 +88,9 @@ namespace Raminagrobis.WPF
             }
         }
         #endregion
+        #endregion
 
+        #region BtnFournisseur
         #region BtnFournisseurList
         private void BtnFournisseurList(object sender, RoutedEventArgs e)
         {
@@ -163,7 +166,9 @@ namespace Raminagrobis.WPF
             }
         }
         #endregion
+        #endregion
 
+        #region BtnProduit
         #region BtnProduitList
         private void BtnProduitList(object sender, RoutedEventArgs e)
         {
@@ -220,6 +225,38 @@ namespace Raminagrobis.WPF
                 Main.Navigate(GestionnaireDeFenetres.ProduitsDelete);
             }
         }
+        #endregion
+        #endregion
+
+        #region Panier
+        #region BtnPanierList
+        private void BtnPanierList(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Panier == null)
+            {
+                GestionnaireDeFenetres.Panier = new Panier();
+            }
+            Main.Navigate(GestionnaireDeFenetres.Panier);
+        }
+        #endregion
+
+        #region BtnPanierDetail
+        private void BtnPanierDetail(object sender, RoutedEventArgs e)
+        {
+            if(GestionnaireDeFenetres.Panier == null || GestionnaireDeFenetres.Panier.lvPanier.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez séléctionner un panier de la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.PanierDetail == null)
+                {
+                    GestionnaireDeFenetres.PanierDetail = new PanierDetail();
+                }
+                Main.Navigate(GestionnaireDeFenetres.PanierDetail);
+            }
+        }
+        #endregion
         #endregion
     }
 }

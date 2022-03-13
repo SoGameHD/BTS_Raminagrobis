@@ -31,11 +31,11 @@
                     <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnProduitUdpate"/>
                     <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnProduitDelete"/>
                 </MenuItem>
-                <!--<MenuItem Header="Panier" Height="20" Width="69">
-                    <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>-->
-                    <!--<MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierCloturer"/>
-                    <MenuItem Header="Voir le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierView"/>-->
-                <!--</MenuItem>-->
+                <MenuItem Header="Panier" Height="20" Width="80">
+                    <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPanierList"/>
+                    <!--<MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierCloturer"/>-->
+                    <MenuItem Header="Voir le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierDetail"/>
+                </MenuItem>
             </Menu>
         </StackPanel>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden" Margin="0 25 0 0" />
