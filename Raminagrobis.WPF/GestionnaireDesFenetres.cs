@@ -19,6 +19,8 @@ namespace Raminagrobis.WPF
         static public FournisseurDelete? FournisseurDelete;
         static public Catalogue? Catalogue;
         static public Produits? Produits;
-
+        static public ProduitsInsert? ProduitsInsert;
+        static public ProduitsUpdate? ProduitsUpdate;
+        static public ProduitsDelete? ProduitsDelete;
     }
 }
