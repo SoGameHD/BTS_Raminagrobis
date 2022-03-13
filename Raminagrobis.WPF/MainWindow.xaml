@@ -25,6 +25,12 @@
                     <!--<MenuItem Header="EnregistrerPrix" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnPrixEnregistrer"/>-->
                     <MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnFournisseurReference"/>
                 </MenuItem>
+                <MenuItem Header="Produits" Height="20" Width="80">
+                    <MenuItem Header="Voir" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnProduitList"/>
+                    <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140"  Click="BtnProduitInsert" />
+                    <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnProduitUdpate"/>
+                    <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnProduitDelete"/>
+                </MenuItem>
                 <!--<MenuItem Header="Panier" Height="20" Width="69">
                     <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>-->
                     <!--<MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierCloturer"/>

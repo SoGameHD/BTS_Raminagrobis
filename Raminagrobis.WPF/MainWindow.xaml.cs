@@ -164,5 +164,62 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
+        #region BtnProduitList
+        private void BtnProduitList(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null)
+            {
+                GestionnaireDeFenetres.Produits = new Produits();
+            }
+            Main.Navigate(GestionnaireDeFenetres.Produits);
+        }
+        #endregion
+
+        #region BtnProduitInsert
+        private void BtnProduitInsert(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.ProduitsInsert == null)
+            {
+                GestionnaireDeFenetres.ProduitsInsert = new ProduitsInsert();
+            }
+            Main.Navigate(GestionnaireDeFenetres.ProduitsInsert);
+        }
+        #endregion
+
+        #region BtnProduitUpdate
+        private void BtnProduitUdpate(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null || GestionnaireDeFenetres.Produits.lvProduits.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez séléctionner un produit dans la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.ProduitsUpdate == null)
+                {
+                    GestionnaireDeFenetres.ProduitsUpdate = new ProduitsUpdate((Produits_DTO)GestionnaireDeFenetres.Produits.lvProduits.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.ProduitsUpdate);
+            }
+        }
+        #endregion
+
+        #region BtnProduitDelete
+        private void BtnProduitDelete(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null || GestionnaireDeFenetres.Produits.lvProduits == null)
+            {
+                MessageBox.Show("Veuillez afficher la liste des produits");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.ProduitsDelete == null)
+                {
+                    GestionnaireDeFenetres.ProduitsDelete = new ProduitsDelete();
+                }
+                Main.Navigate(GestionnaireDeFenetres.ProduitsDelete);
+            }
+        }
+        #endregion
     }
 }
