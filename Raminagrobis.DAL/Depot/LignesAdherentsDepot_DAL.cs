@@ -15,7 +15,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id_produit, id_commande, id_ligne_global, quantite FROM LignesAdherent";
+            commande.CommandText = "SELECT ID, id_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent";
             var reader = commande.ExecuteReader();
 
             var listeAdherents = new List<LignesAdherents_DAL>();
@@ -25,7 +25,8 @@ namespace Raminagrobis.DAL.Depot
                 var lignesAdherent = new LignesAdherents_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
-                                        reader.GetInt32(3)
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
                                         );
 
                 listeAdherents.Add(lignesAdherent);
@@ -40,17 +41,41 @@ namespace Raminagrobis.DAL.Depot
         #region GetByID
         public override LignesAdherents_DAL GetByID(int ID)
         {
-            throw new NotImplementedException();
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT ID, id_produit, id_ligne_global, id_adherent, quantite FROM LignesAdherent WHERE ID=@ID";
+            commande.Parameters.Add(new SqlParameter("@ID", ID));
+            var reader = commande.ExecuteReader();
+
+            LignesAdherents_DAL lignesAdherents;
+            if (reader.Read())
+            {
+                lignesAdherents = new LignesAdherents_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
+                                        );
+            }
+            else
+            {
+                throw new Exception($"Aucune occurance à l'ID {ID} dans la table LignesAdherent");
+            }
+
+
+            DetruireConnexionEtCommande();
+
+            return lignesAdherents;
         }
         #endregion
 
-        #region GetByID_produit
-        public LignesAdherents_DAL GetByID_produit(int ID_produit)
+        #region GetByID_ligne_global
+        public LignesAdherents_DAL GetByID_ligne_global(int ID_ligne_global)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_produit, ID_commande, id_ligne_global, quantite FROM LignesAdherent WHERE ID_produit=@ID_produit";
-            commande.Parameters.Add(new SqlParameter("@ID_produit", ID_produit));
+            commande.CommandText = "SELECT ID_ligne_global, id_produit, id_adherent, quantite FROM LignesAdherent WHERE ID_ligne_global=@ID_ligne_global";
+            commande.Parameters.Add(new SqlParameter("@ID_ligne_global", ID_ligne_global));
             var reader = commande.ExecuteReader();
 
             LignesAdherents_DAL listeAdherent;
@@ -58,12 +83,15 @@ namespace Raminagrobis.DAL.Depot
             if (reader.Read())
             {
                 listeAdherent = new LignesAdherents_DAL(reader.GetInt32(0),
-                                        reader.GetInt32(1)
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
                                         );
             }
             else
             {
-                throw new Exception($"Aucune occurance à l'ID {ID_produit} dans la table LignesAdherent");
+                throw new Exception($"Aucune occurance à l'ID_ligne_global {ID_ligne_global} dans la table LignesAdherent");
             }
 
             DetruireConnexionEtCommande();
@@ -72,13 +100,13 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
-        #region GetByID_commande
-        public LignesAdherents_DAL GetByID_commande(int ID_commande)
+        #region GetByID_adherent
+        public LignesAdherents_DAL GetByID_adherent(int ID_adherent)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_produit, ID_commande, id_ligne_global, quantite FROM LignesAdherent WHERE ID_commande=@ID_commande";
-            commande.Parameters.Add(new SqlParameter("@ID_commande", ID_commande));
+            commande.CommandText = "SELECT ID_adherent, id_produit, id_ligne_global, quantite FROM LignesAdherent WHERE ID_adherent=@ID_adherent";
+            commande.Parameters.Add(new SqlParameter("@ID_adherent", ID_adherent));
             var reader = commande.ExecuteReader();
 
             LignesAdherents_DAL listeAdherent;
@@ -86,12 +114,15 @@ namespace Raminagrobis.DAL.Depot
             if (reader.Read())
             {
                 listeAdherent = new LignesAdherents_DAL(reader.GetInt32(0),
-                                        reader.GetInt32(1)
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
                                         );
             }
             else
             {
-                throw new Exception($"Aucune occurance à l'ID {ID_commande} dans la table LignesAdherent");
+                throw new Exception($"Aucune occurance à l'ID_adherent {ID_adherent} dans la table LignesAdherent");
             }
 
             DetruireConnexionEtCommande();
@@ -105,15 +136,13 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO LignesAdherent (id_produit, id_commande, id_ligne_global, quantite) VALUES (@ID_produit, @ID_commande, @ID_ligne_global, @Quantite); SELECT SCOPE_IDENTITY()";
+            commande.CommandText = "INSERT INTO LignesAdherent (id_produit, id_ligne_global, id_adherent, quantite) VALUES (@ID_produit, @ID_ligne_global, @ID_adherent, @Quantite); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@ID_produit", lignesAdherent.ID_produit));
-            commande.Parameters.Add(new SqlParameter("@ID_commande", lignesAdherent.ID_commande));
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", lignesAdherent.ID_ligne_global));
+            commande.Parameters.Add(new SqlParameter("@ID_adherent", lignesAdherent.ID_adherent));
             commande.Parameters.Add(new SqlParameter("@Quantite", lignesAdherent.Quantite));
-            var ID_produit = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            var ID_commande = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            lignesAdherent.ID_produit = ID_produit;
-            lignesAdherent.ID_commande = ID_commande;
+            var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());
+            lignesAdherent.ID = ID;
 
             DetruireConnexionEtCommande();
 
@@ -126,16 +155,17 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE LignesAdherent SET id_ligne_global = @ID_ligne_global, quantite = @Quantite WHERE ID_produit = @ID_produit AND ID_commande = @ID_commande";
+            commande.CommandText = "UPDATE LignesAdherent SET id_produit = @ID_produit, id_ligne_global = @ID_ligne_global, id_adherent = @ID_adherent, quantite = @Quantite WHERE ID = @ID";
             commande.Parameters.Add(new SqlParameter("@ID_produit", lignesAdherent.ID_produit));
-            commande.Parameters.Add(new SqlParameter("@ID_commande", lignesAdherent.ID_commande));
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", lignesAdherent.ID_ligne_global));
+            commande.Parameters.Add(new SqlParameter("@ID_adherent", lignesAdherent.ID_adherent));
             commande.Parameters.Add(new SqlParameter("@Quantite", lignesAdherent.Quantite));
+            commande.Parameters.Add(new SqlParameter("@ID", lignesAdherent.ID));
             var nombreDeLignesAffectees = commande.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                throw new Exception($"Impossible de mettre à jour la LignesAdherents d'ID_produit {lignesAdherent.ID_produit} & d'ID_commande {lignesAdherent.ID_commande}");
+                throw new Exception($"Impossible de mettre à jour la LignesAdherents d'ID {lignesAdherent.ID} ");
             }
 
             DetruireConnexionEtCommande();
@@ -145,20 +175,21 @@ namespace Raminagrobis.DAL.Depot
         #endregion
 
         #region Delete
-        public void Delete(int ID_produit, int ID_commande)
+        public override void Delete(LignesAdherents_DAL lignesAdherent)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "DELETE FROM LignesAdherent WHERE ID_commande=@ID_commande and ID_produit=@ID_produit";
-            commande.Parameters.Add(new SqlParameter("@ID_produit", ID_produit));
-            commande.Parameters.Add(new SqlParameter("@ID_commande", ID_commande));
-            commande.ExecuteNonQuery();
+            commande.CommandText = "DELETE FROM LignesAdherent WHERE ID=@ID";
+            commande.Parameters.Add(new SqlParameter("@ID", lignesAdherent.ID));
+
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees < 0)
+            {
+                throw new Exception($"Impossible de supprimer la ligneAdherent d'ID {lignesAdherent.ID}");
+            }
 
             DetruireConnexionEtCommande();
-        }
-        public override void Delete(LignesAdherents_DAL lignesAdherent)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

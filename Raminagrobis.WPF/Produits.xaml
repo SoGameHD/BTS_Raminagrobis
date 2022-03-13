@@ -9,7 +9,7 @@
       Title="Produits" Loaded="LoadPage">
 
     <Grid>
-        <ListView Name="lvProduits" Margin="0,35,0,0">
+        <ListView Name="lvProduits">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Reference " Width="160" DisplayMemberBinding="{Binding Reference }" />

@@ -10,6 +10,6 @@ namespace Raminagrobis.DTO.DTO
     {
         public int ID_adherent { get; set; }
         public int ID_panier { get; set; }
-        public int? ID { get; set; }
+        public int ID { get; set; }
     }
 }

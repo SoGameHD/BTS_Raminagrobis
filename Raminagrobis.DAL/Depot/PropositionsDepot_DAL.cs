@@ -15,14 +15,19 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT prix FROM Propositions";
+            commande.CommandText = "SELECT id, id_ligne_global, id_fournisseur, id_produit, prix FROM Propositions";
             var reader = commande.ExecuteReader();
 
             var listePropositions = new List<Propositions_DAL>();
 
             while (reader.Read())
             {
-                var commande = new Propositions_DAL(reader.GetInt16(0));
+                var commande = new Propositions_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
+                                        );
 
                 listePropositions.Add(commande);
             }
@@ -36,7 +41,31 @@ namespace Raminagrobis.DAL.Depot
         #region GetByID
         public override Propositions_DAL GetByID(int ID)
         {
-            throw new NotImplementedException();
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT ID, id_ligne_global, id_fournisseur, id_produit, prix FROM Propositions WHERE ID=@ID";
+            commande.Parameters.Add(new SqlParameter("@ID", ID));
+            var reader = commande.ExecuteReader();
+
+            Propositions_DAL propositions;
+            if (reader.Read())
+            {
+                propositions = new Propositions_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
+                                        );
+            }
+            else
+            {
+                throw new Exception($"Aucune occurance à l'ID {ID} dans la table Propositions");
+            }
+
+
+            DetruireConnexionEtCommande();
+
+            return propositions;
         }
         #endregion
 
@@ -45,7 +74,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_ligne_global, ID_fournisseur, prix FROM Propositions WHERE ID_ligne_global=@ID_ligne_global";
+            commande.CommandText = "SELECT ID, id_ligne_global, id_fournisseur, id_produit, prix FROM Propositions WHERE ID_ligne_global=@ID_ligne_global";
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", ID_ligne_global));
             var reader = commande.ExecuteReader();
 
@@ -53,10 +82,12 @@ namespace Raminagrobis.DAL.Depot
 
             if (reader.Read())
             {
-                listePropositions = new Propositions_DAL(reader.GetInt16(0),
-                                            reader.GetInt16(1),
-                                            reader.GetInt16(2)
-                                            );
+                listePropositions = new Propositions_DAL(reader.GetInt32(0),
+                                            reader.GetInt32(1),
+                                            reader.GetInt32(2),
+                                            reader.GetInt32(3),
+                                            reader.GetInt32(4)
+                                        );
             }
             else
             {
@@ -75,7 +106,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID_ligne_global, id_fournisseur, prix FROM Propositions WHERE ID_fournisseur=@ID_fournisseur";
+            commande.CommandText = "SELECT ID, id_ligne_global, id_fournisseur, id_produit, prix WHERE ID_fournisseur=@ID_fournisseur";
             commande.Parameters.Add(new SqlParameter("@ID_fournisseur", ID_fournisseur));
             var reader = commande.ExecuteReader();
 
@@ -83,10 +114,12 @@ namespace Raminagrobis.DAL.Depot
 
             if (reader.Read())
             {
-                listePropositions = new Propositions_DAL(reader.GetInt16(0),
-                                            reader.GetInt16(1),
-                                            reader.GetInt16(2)
-                                            );
+                listePropositions = new Propositions_DAL(reader.GetInt32(0),
+                                            reader.GetInt32(1),
+                                            reader.GetInt32(2),
+                                            reader.GetInt32(3),
+                                            reader.GetInt32(4)
+                                        );
             }
             else
             {
@@ -105,14 +138,13 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO Propositions (id_ligne_global, id_fournisseur, prix) VALUES (@ID_ligne_global, @ID_fournisseur, @Prix); SELECT SCOPE_IDENTITY()";
+            commande.CommandText = "INSERT INTO Propositions (id_ligne_global, id_fournisseur, id_produit, prix) VALUES (@ID_ligne_global, @ID_fournisseur, @ID_produit, @Prix); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", propositions.ID_ligne_global));
             commande.Parameters.Add(new SqlParameter("@ID_fournisseur", propositions.ID_fournisseur));
+            commande.Parameters.Add(new SqlParameter("@ID_produit", propositions.ID_produit));
             commande.Parameters.Add(new SqlParameter("@Prix", propositions.Prix));
-            var ID_ligne_global = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            var ID_fournisseur = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            propositions.ID_ligne_global = ID_ligne_global;
-            propositions.ID_fournisseur = ID_fournisseur;
+            var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());
+            propositions.ID = ID;
 
             DetruireConnexionEtCommande();
 
@@ -125,15 +157,14 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE Propositions SET prix = @Prix WHERE ID_ligne_global = @ID_ligne_global AND ID_fournisseur = @ID_fournisseur";
+            commande.CommandText = "UPDATE Propositions SET prix = @Prix WHERE ID = @ID";
             commande.Parameters.Add(new SqlParameter("@Prix", propositions.Prix));
-            commande.Parameters.Add(new SqlParameter("@ID_ligne_global", propositions.ID_ligne_global));
-            commande.Parameters.Add(new SqlParameter("@ID_fournisseur", propositions.ID_fournisseur));
+            commande.Parameters.Add(new SqlParameter("@ID", propositions.ID));
             var nombreDeLignesAffectees = commande.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                throw new Exception($"Impossible de mettre à jour le propositions d'ID_ligne_global {propositions.ID_ligne_global} & d'ID_fournisseur {propositions.ID_fournisseur}");
+                throw new Exception($"Impossible de mettre à jour le propositions d'ID_ligne_global {propositions.ID}");
             }
 
             DetruireConnexionEtCommande();

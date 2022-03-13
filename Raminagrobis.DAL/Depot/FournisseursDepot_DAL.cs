@@ -45,7 +45,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID, societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs where ID=@ID";
+            commande.CommandText = "SELECT ID, societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs WHERE ID=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = commande.ExecuteReader();
 

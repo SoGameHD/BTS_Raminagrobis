@@ -9,6 +9,6 @@ namespace Raminagrobis.DTO.DTO
     public class Paniers_DTO
     {
         public string Libelle { get; set; }
-        public int? ID { get; set; }
+        public int ID { get; set; }
     }
 }

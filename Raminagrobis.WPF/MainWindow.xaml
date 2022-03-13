@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Raminagrobis.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1202.8">
+        d:DesignHeight="500" d:DesignWidth="1200"
+        Title="MainWindow" Height="500" Width="1200">
     <Grid>
-        <StackPanel Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-            <Menu Height="24" Width="800">
+        <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top">
+            <Menu Height="25" Width="1200">
                 <MenuItem Header="Adherents" Height="20" Width="80">
                     <MenuItem Header="Voir" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentList"/>
                     <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnAdherentInsert" />
@@ -21,16 +22,16 @@
                     <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140"  Click="BtnFournisseurInsert" />
                     <MenuItem Header="Modifier" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurUdpate"/>
                     <MenuItem Header="Supprimer" HorizontalAlignment="Left" Height="20" Width="140" Click="BtnFournisseurDelete"/>
-                    <!--<MenuItem Header="EnregistrerPrix" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnProduitsEnregistrer"/>
-                    <MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="Btn"/>-->
+                    <!--<MenuItem Header="EnregistrerPrix" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnPrixEnregistrer"/>-->
+                    <MenuItem Header="Catalogue" HorizontalAlignment="Left" Height="20" Width="165" Click="BtnFournisseurReference"/>
                 </MenuItem>
-                <MenuItem Header="Panier" Height="20" Width="69">
-                    <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>
+                <!--<MenuItem Header="Panier" Height="20" Width="69">
+                    <MenuItem Header="Voir les paniers" HorizontalAlignment="Left" Click="BtnPaniersList"/>-->
                     <!--<MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierCloturer"/>
                     <MenuItem Header="Voir le panier selectionné" HorizontalAlignment="Left" Click="BtnPanierView"/>-->
-                </MenuItem>
+                <!--</MenuItem>-->
             </Menu>
         </StackPanel>
-        <Frame x:Name="Main" NavigationUIVisibility="Hidden" Margin="0 35 0 0" />
+        <Frame x:Name="Main" NavigationUIVisibility="Hidden" Margin="0 25 0 0" />
     </Grid>
 </Window>

@@ -28,11 +28,18 @@ namespace Raminagrobis.METIER.Services
         #endregion
 
         #region GetByID_produit
-        public Liaison_METIER GetByID_produit(int id_produit)
+        public List<Liaison_METIER> GetByID_produit(int id_produit)
         {
+            var result = new List<Liaison_METIER>();
             var depot = new LiaisonDepot_DAL();
-            var item = depot.GetByID_produit(id_produit);
-            return new Liaison_METIER(item.ID_produit, item.ID_fournisseur);
+
+            foreach (var item in depot.GetByID_produit(id_produit))
+            {
+                Liaison_METIER liaison = new Liaison_METIER(item.ID_produit, item.ID_fournisseur);
+                result.Add(liaison);
+            }
+
+            return result;
         }
         #endregion
 

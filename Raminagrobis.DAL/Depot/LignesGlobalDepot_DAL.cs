@@ -15,7 +15,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id, id_panier, quantite, id_produit FROM LignesGlobal";
+            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal";
             var reader = commande.ExecuteReader();
 
             var listeGlobal = new List<LignesGlobal_DAL>();
@@ -25,7 +25,7 @@ namespace Raminagrobis.DAL.Depot
                 var lignesGlobal = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
-                                        reader.GetInt32(3)
+                                        reader.GetBoolean(3)
                                         );
 
                 listeGlobal.Add(lignesGlobal);
@@ -42,7 +42,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID, id_panier, quantite, id_produit FROM LignesGlobal WHERE ID=@ID";
+            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal WHERE ID=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = commande.ExecuteReader();
 
@@ -53,7 +53,7 @@ namespace Raminagrobis.DAL.Depot
                 listeGlobal = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
-                                        reader.GetInt32(3)
+                                        reader.GetBoolean(3)
                                         );
             }
             else
@@ -67,15 +67,46 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region GetByAnneNumSemaine
+        public LignesGlobal_DAL GetByAnneNumSemaine(int annee, int num_semaine)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT ID, annee, num_semaine, actif FROM LignesGlobal WHERE annee=@Annee AND Num_semaine=Num_semaine";
+            commande.Parameters.Add(new SqlParameter("@Annee", annee));
+            commande.Parameters.Add(new SqlParameter("@Num_semaine", num_semaine));
+            var reader = commande.ExecuteReader();
+
+            LignesGlobal_DAL listeGlobal;
+
+            if (reader.Read())
+            {
+                listeGlobal = new LignesGlobal_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetBoolean(3)
+                                        );
+            }
+            else
+            {
+                throw new Exception($"Aucune occurance à l'année {annee} et à la semaine {num_semaine} dans la table LignesGlobal");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return listeGlobal;
+        }
+        #endregion
+
         #region Insert
         public override LignesGlobal_DAL Insert(LignesGlobal_DAL lignesGlobal)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO LignesGlobal(id_panier, quantite, id_produit) VALUES (@ID_panier, @Quantite, @ID_produit); SELECT SCOPE_IDENTITY()";
-            commande.Parameters.Add(new SqlParameter("@ID_panier", lignesGlobal.ID_panier));
-            commande.Parameters.Add(new SqlParameter("@Quantite", lignesGlobal.Quantite));
-            commande.Parameters.Add(new SqlParameter("@ID_produit", lignesGlobal.ID_produit));
+            commande.CommandText = "INSERT INTO LignesGlobal(annee, num_semaine, actif) VALUES (@Annee, @Num_semaine, @Actif); SELECT SCOPE_IDENTITY()";
+            commande.Parameters.Add(new SqlParameter("@Annee", lignesGlobal.Annee));
+            commande.Parameters.Add(new SqlParameter("@Num_semaine", lignesGlobal.Num_semaine));
+            commande.Parameters.Add(new SqlParameter("@Actif", lignesGlobal.Actif));
 
             var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());
 
@@ -92,10 +123,10 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE LignesGlobal SET id_panier = @ID_panier, quantite = @Quantite, id_produit = @ID_produit WHERE ID = @ID";
-            commande.Parameters.Add(new SqlParameter("@ID_panier", lignesGlobal.ID_panier));
-            commande.Parameters.Add(new SqlParameter("@Quantite", lignesGlobal.Quantite));
-            commande.Parameters.Add(new SqlParameter("@ID_produit", lignesGlobal.ID_produit));
+            commande.CommandText = "UPDATE LignesGlobal SET annee = @Annee, num_semaine = @Num_semaine, actif = @Actif WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@Annee", lignesGlobal.Annee));
+            commande.Parameters.Add(new SqlParameter("@Num_semaine", lignesGlobal.Num_semaine));
+            commande.Parameters.Add(new SqlParameter("@Actif", lignesGlobal.Actif));
             commande.Parameters.Add(new SqlParameter("@ID", lignesGlobal.ID));
             var nombreDeLignesAffectees = commande.ExecuteNonQuery();
 

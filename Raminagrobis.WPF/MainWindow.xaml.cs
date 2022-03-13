@@ -115,7 +115,7 @@ namespace Raminagrobis.WPF
         {
             if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez sélectionner un fournisseur dans la liste");
+                MessageBox.Show("Veuillez séléctionner un fournisseur dans la liste");
             }
             else
             {
@@ -146,15 +146,23 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region BtnPaniersList
-        private void BtnPaniersList(object sender, RoutedEventArgs e)
+        #region BtnFournisseurReference
+        private void BtnFournisseurReference(object sender, RoutedEventArgs e)
         {
-            if (GestionnaireDeFenetres.Paniers == null)
+            if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem == null)
             {
-                GestionnaireDeFenetres.Paniers = new Paniers();
+                MessageBox.Show("Veuillez séléctionner un fournisseur dans la liste");
             }
-            Main.Navigate(GestionnaireDeFenetres.Paniers);
+            else
+            {
+                if (GestionnaireDeFenetres.Catalogue == null)
+                {
+                    GestionnaireDeFenetres.Catalogue = new Catalogue((Fournisseur_DTO)GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.Catalogue);
+            }
         }
         #endregion
+
     }
 }
