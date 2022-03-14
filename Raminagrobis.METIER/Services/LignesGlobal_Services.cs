@@ -46,20 +46,35 @@ namespace Raminagrobis.METIER.Services
         #endregion
 
         #region Insert
-        public void Insert(LignesGlobal_DTO input)
+        public LignesGlobal_DTO Insert(LignesGlobal_DTO input)
         {
             var lignesGlobal = new LignesGlobal_DAL(input.Annee, input.Num_semaine, input.Actif);
             var depot = new LignesGlobalDepot_DAL();
             depot.Insert(lignesGlobal);
+
+            return input;
         }
         #endregion
 
         #region Update
-        public void Update(int id, LignesGlobal_DTO input)
+        public LignesGlobal_DTO Update(int id, LignesGlobal_DTO input)
         {
             var lignesGlobal = new LignesGlobal_DAL(id, input.Annee, input.Num_semaine, input.Actif);
             var depot = new LignesGlobalDepot_DAL();
             depot.Update(lignesGlobal);
+
+            return input;
+        }
+        #endregion
+
+        #region UpdateActif
+        public LignesGlobal_DTO UpdateActif(LignesGlobal_DTO input)
+        {
+            var lignesGlobal = new LignesGlobal_DAL(input.ID, input.Annee, input.Num_semaine, input.Actif);
+            var depot = new LignesGlobalDepot_DAL();
+            depot.UpdateActif(lignesGlobal);
+
+            return input;
         }
         #endregion
 

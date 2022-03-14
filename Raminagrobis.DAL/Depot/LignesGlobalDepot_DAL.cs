@@ -142,6 +142,26 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region UpdateActif
+        public LignesGlobal_DAL UpdateActif(LignesGlobal_DAL lignesGlobal)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE LignesGlobal SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", lignesGlobal.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour la LignesGlobal d'ID {lignesGlobal.ID}");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return lignesGlobal;
+        }
+        #endregion
+
         #region Delete
         public override void Delete(LignesGlobal_DAL lignesGlobal)
         {

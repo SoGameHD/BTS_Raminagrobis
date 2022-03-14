@@ -171,6 +171,26 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region UpdateActif
+        public Produits_DAL UpdateActif(Produits_DAL produit)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE Produits SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", produit.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour le produit d'ID {produit.ID}");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return produit;
+        }
+        #endregion
+
         #region Delete
         public override void Delete(Produits_DAL produits)
         {
