@@ -125,6 +125,26 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region UpdateActif
+        public Fournisseurs_DAL UpdateActif(Fournisseurs_DAL fournisseur)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE Fournisseurs SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", fournisseur.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour le fournisseur d'ID {fournisseur.ID}");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return fournisseur;
+        }
+        #endregion
+
         #region Delete
         public override void Delete(Fournisseurs_DAL fournisseur)
         {

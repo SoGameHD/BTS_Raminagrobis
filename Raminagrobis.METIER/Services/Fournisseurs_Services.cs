@@ -55,6 +55,17 @@ namespace Raminagrobis.METIER.Services
         }
         #endregion
 
+        #region UpdateActif
+        public Fournisseur_DTO UpdateActif(int id, Fournisseur_DTO input)
+        {
+            var fournisseurs = new Fournisseurs_DAL(id, input.Societe, input.Civilite, input.Nom, input.Prenom, input.Email, input.Adresse, input.Actif);
+            var depot = new FournisseursDepot_DAL();
+            depot.UpdateActif(fournisseurs);
+
+            return input;
+        }
+        #endregion
+
         #region Delete
         public void Delete(int id)
         {

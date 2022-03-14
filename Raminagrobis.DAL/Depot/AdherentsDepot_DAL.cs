@@ -126,6 +126,26 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region UpdateActif
+        public Adherent_DAL UpdateActif(Adherent_DAL adherent)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE Adherents SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", adherent.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour l'adhérent d'ID {adherent.ID}");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return adherent;
+        }
+        #endregion
+
         #region Delete
         public override void Delete(Adherent_DAL adherent)
         {
