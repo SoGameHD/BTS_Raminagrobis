@@ -52,15 +52,16 @@ namespace Raminagrobis.WPF
             opfd.ShowDialog();
             var liste = File.ReadAllText(opfd.FileName);
 
-            var fichiercsv = File.ReadLines(opfd.FileName);
-            List<string> fichier = fichiercsv.Skip(1).Take(fichiercsv.Count() - 1).ToList();
+            var file = File.ReadLines(opfd.FileName);
+            List<string> csv_file = file.Skip(1).Take(file.Count() - 1).ToList();
 
-            for (int i = 1; i < fichiercsv.Count(); i++)
+            for (int i = 1; i < file.Count(); i++)
             {
-                fichier.ToList().Add(fichiercsv.ElementAt(i));
+                csv_file.ToList().Add(file.ElementAt(i));
             }
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
-            var commande = clientApi.FournisseursCatalogueAsync(fournisseur.ID, fichiercsv);
+            var apiclient = new Client("https://localhost:44345/", new HttpClient());
+            apiclient.FournisseursCatalogueAsync(fournisseur.ID, csv_file); 
+            MessageBox.Show("Le fichier CSV a été enregistré");
         }
         #endregion
     }

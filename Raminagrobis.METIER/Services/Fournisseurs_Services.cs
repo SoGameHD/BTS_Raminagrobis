@@ -77,7 +77,7 @@ namespace Raminagrobis.METIER.Services
                 string libelle = liste[1];
                 string marque = liste[2];
 
-                Produits_METIER produit = new Produits_METIER(libelle, marque, reference, true);
+                Produits_METIER produit = new Produits_METIER(reference, libelle, marque, true);
                 listproduit.Add(produit);
             }
 
@@ -89,6 +89,7 @@ namespace Raminagrobis.METIER.Services
         public void GetListProduitsByFournisseur(int id, IEnumerable<String> csv_file)
         {
             Produits_Services produits_services = new Produits_Services();
+            Liaison_Services liaison_services = new Liaison_Services();
 
             List<Produits_METIER> listProduitBDD = produits_services.GetByIDFournisseur(id);
 
@@ -100,6 +101,10 @@ namespace Raminagrobis.METIER.Services
             foreach (var csvproduit in listProduitCSV)
             {
                 Produits_METIER matchproduits = null;
+                if (listProduitBDD.Count == 0)
+                {
+                    produitToAdd.Add(csvproduit);
+                }
                 foreach (var produitsBDD in listProduitBDD)
                 {
                     if (produitsBDD.Reference.Equals(csvproduit.Reference))
@@ -145,8 +150,10 @@ namespace Raminagrobis.METIER.Services
                 produit_DTO.Marque = produit.Marque;
                 produit_DTO.Actif = produit.Actif;
 
-                produits_services.Update(produit.ID, produit_DTO);
+                produits_services.UpdateActif(produit.ID, produit_DTO);
+                liaison_services.Delete(produit.ID, id);
             }
+            Console.WriteLine(csv_file);
         }
         #endregion
     }
