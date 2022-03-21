@@ -34,6 +34,24 @@ namespace Raminagrobis.METIER.Services
         }
         #endregion
 
+        #region GetByID_fournisseur
+        public Propositions_METIER GetByID_fournisseur(int id_fournisseur)
+        {
+            var depot = new PropositionsDepot_DAL();
+            var input = depot.GetByID_fournisseur(id_fournisseur);
+            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+        }
+        #endregion
+
+        #region GetByID_ligne_global
+        public Propositions_METIER GetByID_ligne_global(int id_ligne_global)
+        {
+            var depot = new PropositionsDepot_DAL();
+            var input = depot.GetByID_fournisseur(id_ligne_global);
+            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+        }
+        #endregion
+
         #region Insert
         public void Insert(Propositions_DTO input)
         {
