@@ -31,7 +31,7 @@ namespace Raminagrobis.WPF
             this.UpdateReference.Text = produits.Reference;
             this.UpdateLibelle.Text = produits.Libelle;
             this.UpdateMarque.Text = produits.Marque;
-            this.UpdateActif.Text = produits.Actif.ToString();
+            this.UpdateActif.IsChecked = produits.Actif;
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace Raminagrobis.WPF
                 Reference = this.UpdateReference.Text,
                 Libelle = this.UpdateLibelle.Text,
                 Marque = this.UpdateMarque.Text,
-                Actif = Boolean.Parse(this.UpdateActif.Text),
+                Actif = this.UpdateActif.IsChecked == null ? false : this.UpdateActif.IsChecked.Value,
             };
 
             apiclient.ProduitsPutAsync(produits);

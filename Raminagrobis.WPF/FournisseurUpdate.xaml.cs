@@ -34,7 +34,7 @@ namespace Raminagrobis.WPF
             this.UpdatePrenom.Text = fournisseur.Prenom;
             this.UpdateEmail.Text = fournisseur.Email;
             this.UpdateAdresse.Text = fournisseur.Adresse;
-            this.UpdateActif.Text = fournisseur.Actif.ToString();
+            this.UpdateActif.IsChecked = fournisseur.Actif;
         }
         #endregion
 
@@ -50,7 +50,7 @@ namespace Raminagrobis.WPF
                 Nom = this.UpdateNom.Text,
                 Prenom = this.UpdatePrenom.Text,
                 Email = this.UpdateEmail.Text,
-                Actif = Boolean.Parse(this.UpdateActif.Text),
+                Actif = this.UpdateActif.IsChecked == null ? false : this.UpdateActif.IsChecked.Value,
             };
 
             apiclient.FournisseursPutAsync(fournisseur);

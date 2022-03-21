@@ -33,7 +33,7 @@ namespace Raminagrobis.WPF
             this.UpdateNom.Text = adherent.Nom;
             this.UpdatePrenom.Text = adherent.Prenom;
             this.UpdateEmail.Text = adherent.Email;
-            this.UpdateActif.Text = adherent.Actif.ToString();
+            this.UpdateActif.IsChecked = adherent.Actif;
         }
         #endregion
 
@@ -49,7 +49,7 @@ namespace Raminagrobis.WPF
                 Nom = this.UpdateNom.Text,
                 Prenom = this.UpdatePrenom.Text,
                 Email = this.UpdateEmail.Text,
-                Actif = Boolean.Parse(this.UpdateActif.Text),
+                Actif = this.UpdateActif.IsChecked == null? false: this.UpdateActif.IsChecked.Value,
             };
 
             apiclient.AdherentsPutAsync(adherent);
