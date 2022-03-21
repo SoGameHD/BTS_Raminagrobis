@@ -74,7 +74,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT id, libelle, marque, reference FROM produits INNER JOIN Liaison ON id = id_produit WHERE id_fournisseur = @ID_fournisseur";
+            commande.CommandText = "SELECT id, libelle, marque, reference, actif FROM produits INNER JOIN Liaison ON id = id_produit WHERE id_fournisseur = @ID_fournisseur";
             commande.Parameters.Add(new SqlParameter("@ID_fournisseur", ID_fournisseur));
             var reader = commande.ExecuteReader();
 
@@ -172,22 +172,24 @@ namespace Raminagrobis.DAL.Depot
         #endregion
 
         #region UpdateActif
-        public Produits_DAL UpdateActif(Produits_DAL produit)
+        public void UpdateActif()
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE Produits SET actif = 'false' WHERE ID = @ID";
-            commande.Parameters.Add(new SqlParameter("@ID", produit.ID));
-            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
-
-            if (nombreDeLignesAffectees != 1)
-            {
-                throw new Exception($"Impossible de mettre à jour le produit d'ID {produit.ID}");
-            }
+            commande.CommandText = "UPDATE produits SET actif=1 FROM produits P WHERE EXISTS (SELECT * FROM Liaison WHERE id_produit=P.id)";
 
             DetruireConnexionEtCommande();
+        }
+        #endregion
+        
+        #region UpdateNotActif
+        public void UpdateNotActif()
+        {
+            CreerConnexionEtCommande();
 
-            return produit;
+            commande.CommandText = "UPDATE produits SET actif=0 FROM produits P WHERE NOT EXISTS (SELECT * FROM Liaison WHERE id_produit=P.id)";
+
+            DetruireConnexionEtCommande();
         }
         #endregion
 
