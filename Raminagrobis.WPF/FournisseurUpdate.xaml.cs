@@ -27,7 +27,7 @@ namespace Raminagrobis.WPF
         public FournisseurUpdate(Fournisseur_DTO fournisseur)
         {
             InitializeComponent();
-            this.UpdateID.Text = fournisseur.ID.ToString();
+            this.ShowID.Text = fournisseur.ID.ToString();
             this.UpdateSociete.Text = fournisseur.Societe;
             this.UpdateCivilite.Text = fournisseur.Civilite.ToString();
             this.UpdateNom.Text = fournisseur.Nom;
@@ -44,7 +44,7 @@ namespace Raminagrobis.WPF
             var apiclient = new Client("https://localhost:44345/", new HttpClient());
             Fournisseur_DTO fournisseur = new Fournisseur_DTO()
             {
-                ID = Int32.Parse(this.UpdateID.Text),
+                ID = Int32.Parse(this.ShowID.Text),
                 Societe = this.UpdateSociete.Text,
                 Civilite = Boolean.Parse(this.UpdateCivilite.Text),
                 Nom = this.UpdateNom.Text,
@@ -53,7 +53,8 @@ namespace Raminagrobis.WPF
                 Actif = Boolean.Parse(this.UpdateActif.Text),
             };
 
-            apiclient.FournisseursPutAsync(Int32.Parse(this.id.Text), fournisseur);
+            apiclient.FournisseursPutAsync(fournisseur);
+            MessageBox.Show("Le fournisseur a été modifié");
         }
         #endregion
     }

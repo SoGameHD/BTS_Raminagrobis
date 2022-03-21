@@ -44,9 +44,9 @@ namespace Raminagrobis.METIER.Services
         #endregion
 
         #region Update
-        public void Update(int id, Propositions_DTO input)
+        public void Update(Propositions_DTO input)
         {
-            var propositions = new Propositions_DAL(id, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            var propositions = new Propositions_DAL(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
             var depot = new PropositionsDepot_DAL();
             depot.Update(propositions);
         }

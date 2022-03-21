@@ -64,10 +64,10 @@ namespace Raminagrobis.API.Controllers
         #endregion
 
         #region Update
-        [HttpPut("{id}")]
-        public void Update (int id, [FromBody] Fournisseur_DTO item)
+        [HttpPut]
+        public void Update ([FromBody] Fournisseur_DTO item)
         {
-            service.Update(id, item);
+            service.Update(item);
         }
         #endregion
 

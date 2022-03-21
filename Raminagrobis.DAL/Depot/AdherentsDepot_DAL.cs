@@ -103,17 +103,16 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE Adherents SET societe=@Societe, civilite=@Civilite, nom=@Nom, prenom=@Prenom, email=@Email, date_adhesion=@Date_adhesion, actif=@Actif WHERE ID=@ID";
+            commande.CommandText = "UPDATE Adherents SET societe=@Societe, civilite=@Civilite, nom=@Nom, prenom=@Prenom, email=@Email, actif=@Actif WHERE ID=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", adherent.ID));
             commande.Parameters.Add(new SqlParameter("@Societe", adherent.Societe));
             commande.Parameters.Add(new SqlParameter("@Civilite", adherent.Civilite));
             commande.Parameters.Add(new SqlParameter("@Nom", adherent.Nom));
             commande.Parameters.Add(new SqlParameter("@Prenom", adherent.Prenom));
             commande.Parameters.Add(new SqlParameter("@Email", adherent.Email));
-            commande.Parameters.Add(new SqlParameter("@Date_adhesion", adherent.Date_adhesion));
             commande.Parameters.Add(new SqlParameter("@Actif", adherent.Actif));
 
-            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+            var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
