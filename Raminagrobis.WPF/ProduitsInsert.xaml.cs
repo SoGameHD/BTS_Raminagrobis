@@ -43,7 +43,7 @@ namespace Raminagrobis.WPF
             produits_DTO.Reference = InputReference.Text;
             produits_DTO.Libelle = InputLibelle.Text;
             produits_DTO.Marque = InputMarque.Text;
-            produits_DTO.Actif = InputActif.AcceptsReturn;
+            produits_DTO.Actif = InputActif.IsChecked == null ? false : InputActif.IsChecked.Value;
 
             apiclient.ProduitsPostAsync(produits_DTO);
         }

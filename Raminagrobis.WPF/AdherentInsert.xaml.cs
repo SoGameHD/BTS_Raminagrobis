@@ -38,7 +38,7 @@ namespace Raminagrobis.WPF
             adherent_DTO.Nom = InputNom.Text;
             adherent_DTO.Prenom = InputNom.Text;
             adherent_DTO.Email = InputEmail.Text;
-            adherent_DTO.Actif = InputActif.AcceptsReturn;
+            adherent_DTO.Actif = InputActif.IsChecked == null ? false : InputActif.IsChecked.Value;
 
             apiclient.AdherentsPostAsync(adherent_DTO);
             MessageBox.Show("L'adhérent a été enregistré");
