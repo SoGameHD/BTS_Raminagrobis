@@ -54,7 +54,7 @@ namespace Raminagrobis.METIER.Services
             depot.Update(fournisseurs); // Appelle la méthode de modification fournisseur
         }
         #endregion
-
+        
         #region UpdateActif
         public Fournisseur_DTO UpdateActif(int id, Fournisseur_DTO input)
         {

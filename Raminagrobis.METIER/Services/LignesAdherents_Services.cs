@@ -45,6 +45,19 @@ namespace Raminagrobis.METIER.Services
         }
         #endregion
 
+        #region GetByID_fournisseurAndID_lignesGlobal
+        public List<LignesAdherents_METIER> GetByID_fournisseurAndID_lignesGlobal(int id_fournisseur, int id_ligneglobal)
+        {
+            var result = new List<LignesAdherents_METIER>();
+            var depot = new LignesAdherentsDepot_DAL();
+            foreach (var item in depot.GetByID_fournisseurAndID_lignesGlobal(id_fournisseur, id_ligneglobal))
+            {
+                result.Add(new LignesAdherents_METIER(item.ID, item.ID_produit, item.Quantite, item.ID_adherent));
+            }
+            return result;
+        }
+        #endregion
+
         #region Insert
         public void Insert(LignesAdherents_DTO input)
         {

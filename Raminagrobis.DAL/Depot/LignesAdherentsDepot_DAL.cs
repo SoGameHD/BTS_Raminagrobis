@@ -131,6 +131,35 @@ namespace Raminagrobis.DAL.Depot
         }
         #endregion
 
+        #region GetByID_fournisseurAndID_lignesGlobal
+        public List<LignesAdherents_DAL> GetByID_fournisseurAndID_lignesGlobal(int ID_fournisseur, int ID_ligne_global)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "SELECT LA.id, LA.id_produit, LA.quantite, LA.id_ligne_global, LA.id_adherent FROM LignesAdherent LA INNER JOIN produits P ON LA.id = P.id INNER JOIN Liaison L ON P.id = L.id_produit WHERE LA.id_ligne_global=@ID_ligne_global AND L.id_fournisseur=@ID_fournisseur";
+            commande.Parameters.Add(new SqlParameter("@ID_ligne_global", ID_ligne_global));
+            commande.Parameters.Add(new SqlParameter("@ID_fournisseur", ID_fournisseur));
+            var reader = commande.ExecuteReader();
+
+            var listLignesAdherent = new List<LignesAdherents_DAL>();
+
+            while (reader.Read())
+            {
+                LignesAdherents_DAL lignesAdherents = new LignesAdherents_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1),
+                                        reader.GetInt32(2),
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4)
+                                        );
+                listLignesAdherent.Add(lignesAdherents);
+            }
+
+            DetruireConnexionEtCommande();
+
+            return listLignesAdherent;
+        }
+        #endregion
+
         #region Insert
         public override LignesAdherents_DAL Insert(LignesAdherents_DAL lignesAdherent)
         {
