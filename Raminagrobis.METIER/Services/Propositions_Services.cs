@@ -19,7 +19,7 @@ namespace Raminagrobis.METIER.Services
             var depot = new PropositionsDepot_DAL();
             foreach (var item in depot.GetAll())
             {
-                result.Add(new Propositions_METIER(item.ID, item.ID_ligne_global, item.ID_fournisseur, item.ID_produit, item.Prix));
+                result.Add(new Propositions_METIER(item.ID, item.ID_ligne_global, item.ID_fournisseur, item.ID_produit, item.Prix, item.Gagne, item.Societe, item.Libelle_Produit, item.Quantite));
             }
             return result;
         }
@@ -30,7 +30,7 @@ namespace Raminagrobis.METIER.Services
         {
             var depot = new PropositionsDepot_DAL();
             var input = depot.GetByID(id);
-            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix, input.Gagne, input.Societe, input.Libelle_Produit, input.Quantite);
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace Raminagrobis.METIER.Services
         {
             var depot = new PropositionsDepot_DAL();
             var input = depot.GetByID_fournisseur(id_fournisseur);
-            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix, input.Gagne, input.Societe, input.Libelle_Produit, input.Quantite);
         }
         #endregion
 
@@ -48,14 +48,14 @@ namespace Raminagrobis.METIER.Services
         {
             var depot = new PropositionsDepot_DAL();
             var input = depot.GetByID_fournisseur(id_ligne_global);
-            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            return new Propositions_METIER(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix, input.Gagne, input.Societe, input.Libelle_Produit, input.Quantite);
         }
         #endregion
 
         #region Insert
         public void Insert(Propositions_DTO input)
         {
-            var propositions = new Propositions_DAL(input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            var propositions = new Propositions_DAL(input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix, input.Gagne, input.Societe, input.Libelle_Produit, input.Quantite);
             var depot = new PropositionsDepot_DAL();
             depot.Insert(propositions);
         }
@@ -64,7 +64,7 @@ namespace Raminagrobis.METIER.Services
         #region Update
         public void Update(Propositions_DTO input)
         {
-            var propositions = new Propositions_DAL(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix);
+            var propositions = new Propositions_DAL(input.ID, input.ID_ligne_global, input.ID_fournisseur, input.ID_produit, input.Prix, input.Gagne, input.Societe, input.Libelle_Produit, input.Quantite);
             var depot = new PropositionsDepot_DAL();
             depot.Update(propositions);
         }

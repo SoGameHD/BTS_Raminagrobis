@@ -26,7 +26,11 @@ namespace Raminagrobis.DAL.Depot
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),
-                                        reader.GetInt32(4)
+                                        reader.GetInt32(4),
+                                        reader.GetBoolean(5),
+                                        reader.GetString(6),
+                                        reader.GetString(7),
+                                        reader.GetInt32(8)
                                         );
 
                 listePropositions.Add(commande);
@@ -54,7 +58,11 @@ namespace Raminagrobis.DAL.Depot
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),
-                                        reader.GetInt32(4)
+                                        reader.GetInt32(4),
+                                        reader.GetBoolean(5),
+                                        reader.GetString(6),
+                                        reader.GetString(7),
+                                        reader.GetInt32(8)
                                         );
             }
             else
@@ -86,7 +94,11 @@ namespace Raminagrobis.DAL.Depot
                                             reader.GetInt32(1),
                                             reader.GetInt32(2),
                                             reader.GetInt32(3),
-                                            reader.GetInt32(4)
+                                            reader.GetInt32(4),
+                                            reader.GetBoolean(5),
+                                            reader.GetString(6),
+                                            reader.GetString(7),
+                                            reader.GetInt32(8)
                                         );
             }
             else
@@ -118,7 +130,11 @@ namespace Raminagrobis.DAL.Depot
                                             reader.GetInt32(1),
                                             reader.GetInt32(2),
                                             reader.GetInt32(3),
-                                            reader.GetInt32(4)
+                                            reader.GetInt32(4),
+                                            reader.GetBoolean(5),
+                                            reader.GetString(6),
+                                            reader.GetString(7),
+                                            reader.GetInt32(8)
                                         );
             }
             else
@@ -138,11 +154,15 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO Propositions (id_ligne_global, id_fournisseur, id_produit, prix) VALUES (@ID_ligne_global, @ID_fournisseur, @ID_produit, @Prix); SELECT SCOPE_IDENTITY()";
+            commande.CommandText = "INSERT INTO Propositions (id_ligne_global, id_fournisseur, id_produit, prix, gagne, societe, libelle_produit, quantite) VALUES (@ID_ligne_global, @ID_fournisseur, @ID_produit, @Prix, @Gagne, @Societe, @Libelle_produit, @Quantite); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@ID_ligne_global", propositions.ID_ligne_global));
             commande.Parameters.Add(new SqlParameter("@ID_fournisseur", propositions.ID_fournisseur));
             commande.Parameters.Add(new SqlParameter("@ID_produit", propositions.ID_produit));
             commande.Parameters.Add(new SqlParameter("@Prix", propositions.Prix));
+            commande.Parameters.Add(new SqlParameter("@Gagne", propositions.Gagne));
+            commande.Parameters.Add(new SqlParameter("@Societe", propositions.Societe));
+            commande.Parameters.Add(new SqlParameter("@Libelle_produit", propositions.Libelle_Produit));
+            commande.Parameters.Add(new SqlParameter("@Quantite", propositions.Quantite));
             var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());
             propositions.ID = ID;
 
