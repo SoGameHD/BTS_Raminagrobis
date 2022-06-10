@@ -15,6 +15,6 @@ namespace Raminagrobis.DTO.DTO
         public string Email { get; set; }
         public string Adresse { get; set; }
         public bool Actif { get; set; }
-        public int? ID { get; set; }
+        public int ID { get; set; }
     }
 }

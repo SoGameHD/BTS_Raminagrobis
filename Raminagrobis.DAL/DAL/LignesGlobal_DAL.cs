@@ -9,13 +9,13 @@ namespace Raminagrobis.DAL.DAL
 {
     public class LignesGlobal_DAL
     {
-        public int ID_panier { get; set; }
-        public int Quantite { get; set; }
-        public int ID_produit { get; set; }
+        public int Num_semaine { get; set; }
+        public int Annee { get; set; }
+        public bool Actif { get; set; }
         public int ID { get; set; }
 
-        public LignesGlobal_DAL(int id_panier, int quantite, int id_produit) => (ID_panier, Quantite, ID_produit) = (id_panier, quantite, id_produit);
+        public LignesGlobal_DAL(int num_semaine, int annee, bool actif) => (Num_semaine, Annee, Actif) = (num_semaine, annee, actif);
 
-        public LignesGlobal_DAL(int id, int id_panier, int quantite, int id_produit) => (ID, ID_panier, Quantite, ID_produit) = (id, id_panier, quantite, id_produit);
+        public LignesGlobal_DAL(int id, int num_semaine, int annee, bool actif) => (ID, Num_semaine, Annee, Actif) = (id, num_semaine, annee, actif);
     }
 }

@@ -12,6 +12,6 @@ namespace Raminagrobis.DTO.DTO
         public string Libelle { get; set; }
         public string Marque { get; set; }
         public bool Actif { get; set; }
-        public int? ID { get; set; }
+        public int ID { get; set; }
     }
 }

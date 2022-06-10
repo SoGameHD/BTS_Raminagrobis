@@ -27,7 +27,8 @@ namespace Raminagrobis.API.Controllers
                 ID_ligne_global = item.ID_ligne_global,
                 Quantite = item.Quantite,
                 ID_produit = item.ID_produit,
-                ID_commande = item.ID_commande,
+                ID_adherent = item.ID_adherent,
+                ID = item.ID,
             });
         }
         #endregion

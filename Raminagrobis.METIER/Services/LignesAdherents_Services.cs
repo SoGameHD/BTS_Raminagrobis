@@ -21,34 +21,47 @@ namespace Raminagrobis.METIER.Services
             var depot = new LignesAdherentsDepot_DAL();
             foreach (var item in depot.GetAll())
             {
-                result.Add(new LignesAdherents_METIER(item.ID_ligne_global, item.Quantite, item.ID_produit, item.ID_commande));
+                result.Add(new LignesAdherents_METIER(item.ID_ligne_global, item.Quantite, item.ID_produit, item.ID_adherent));
             }
             return result;
         }
         #endregion
 
-        #region GetByID_produit
-        public LignesAdherents_METIER GetByID_produit(int id_produit)
+        #region GetByID_ligne_global
+        public LignesAdherents_METIER GetByID_ligne_global(int id_ligne_global)
         {
             var depot = new LignesAdherentsDepot_DAL();
-            var input = depot.GetByID_produit(id_produit);
-            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_commande, input.ID_ligne_global);
+            var input = depot.GetByID_ligne_global(id_ligne_global);
+            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_adherent, input.ID_ligne_global);
         }
         #endregion
 
-        #region GetByID_commande
-        public LignesAdherents_METIER GetByID_commande(int id_commande)
+        #region GetByID_adherent
+        public LignesAdherents_METIER GetByID_adherent(int id_adherent)
         {
             var depot = new LignesAdherentsDepot_DAL();
-            var input = depot.GetByID_commande(id_commande);
-            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_commande, input.ID_ligne_global);
+            var input = depot.GetByID_adherent(id_adherent);
+            return new LignesAdherents_METIER(input.ID_produit, input.Quantite, input.ID_adherent, input.ID_ligne_global);
+        }
+        #endregion
+
+        #region GetByID_fournisseurAndID_lignesGlobal
+        public List<LignesAdherents_METIER> GetByID_fournisseurAndID_lignesGlobal(int id_fournisseur, int id_ligneglobal)
+        {
+            var result = new List<LignesAdherents_METIER>();
+            var depot = new LignesAdherentsDepot_DAL();
+            foreach (var item in depot.GetByID_fournisseurAndID_lignesGlobal(id_fournisseur, id_ligneglobal))
+            {
+                result.Add(new LignesAdherents_METIER(item.ID, item.ID_produit, item.Quantite, item.ID_adherent));
+            }
+            return result;
         }
         #endregion
 
         #region Insert
         public void Insert(LignesAdherents_DTO input)
         {
-            var lignesAdherents = new LignesAdherents_DAL(input.ID_ligne_global, input.Quantite);
+            var lignesAdherents = new LignesAdherents_DAL(input.ID_produit, input.Quantite, input.ID_adherent, input.ID_ligne_global);
             var depot = new LignesAdherentsDepot_DAL();
             depot.Insert(lignesAdherents);
         }
@@ -57,16 +70,19 @@ namespace Raminagrobis.METIER.Services
         #region Update
         public void Update(LignesAdherents_DTO input)
         {
-            var lignesAdherents = new LignesAdherents_DAL(input.ID_ligne_global, input.Quantite, input.ID_produit, input.ID_commande);
+            var lignesAdherents = new LignesAdherents_DAL(input.ID, input.ID_ligne_global, input.Quantite, input.ID_produit, input.ID_adherent);
             var depot = new LignesAdherentsDepot_DAL();
             depot.Update(lignesAdherents);
         }
         #endregion
 
         #region Delete
-        public void Delete(int id_produit, int id_commande)
+        public void Delete(int id)
         {
-            depot.Delete(id_produit, id_commande);
+            LignesAdherents_DAL lignesAdherent;
+            LignesAdherentsDepot_DAL depot = new LignesAdherentsDepot_DAL();
+            lignesAdherent = depot.GetByID(id);
+            depot.Delete(lignesAdherent);
         }
         #endregion
     }

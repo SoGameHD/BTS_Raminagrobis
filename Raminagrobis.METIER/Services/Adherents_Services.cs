@@ -44,11 +44,22 @@ namespace Raminagrobis.METIER.Services
         #endregion
 
         #region Update
-        public void Update(int id, Adherent_DTO input)
+        public void Update(Adherent_DTO input)
+        {
+            var adherent = new Adherent_DAL(input.ID, input.Societe, input.Civilite, input.Nom, input.Prenom, input.Email, input.Date_adhesion, input.Actif);
+            var depot = new AdherentDepot_DAL();
+            depot.Update(adherent);
+        }
+        #endregion
+
+        #region UpdateActif
+        public Adherent_DTO UpdateActif(int id, Adherent_DTO input)
         {
             var adherent = new Adherent_DAL(id, input.Societe, input.Civilite, input.Nom, input.Prenom, input.Email, input.Date_adhesion, input.Actif);
             var depot = new AdherentDepot_DAL();
-            depot.Update(adherent);
+            depot.UpdateActif(adherent);
+
+            return input;
         }
         #endregion
 

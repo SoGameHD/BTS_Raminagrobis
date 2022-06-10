@@ -21,7 +21,7 @@ namespace Raminagrobis.METIER.Services
             var depot = new LignesGlobalDepot_DAL();
             foreach (var item in depot.GetAll())
             {
-                result.Add(new LignesGlobal_METIER(item.ID, item.ID_panier, item.Quantite, item.ID_produit));
+                result.Add(new LignesGlobal_METIER(item.ID, item.Annee, item.Num_semaine, item.Actif));
             }
             return result;
         }
@@ -32,25 +32,49 @@ namespace Raminagrobis.METIER.Services
         {
             var depot = new LignesGlobalDepot_DAL();
             var input = depot.GetByID(id);
-            return new LignesGlobal_METIER(input.ID, input.ID_panier, input.Quantite, input.ID_produit);
+            return new LignesGlobal_METIER(input.ID, input.Annee, input.Num_semaine, input.Actif);
+        }
+        #endregion
+
+        #region GetByAnneNumSemaine
+        public LignesGlobal_METIER GetByAnneNumSemaine(int annee, int num_semaine)
+        {
+            var depot = new LignesGlobalDepot_DAL();
+            var input = depot.GetByAnneNumSemaine(annee, num_semaine);
+            return new LignesGlobal_METIER(input.ID, input.Annee, input.Num_semaine, input.Actif);
         }
         #endregion
 
         #region Insert
-        public void Insert(LignesGlobal_DTO input)
+        public LignesGlobal_DTO Insert(LignesGlobal_DTO input)
         {
-            var lignesGlobal = new LignesGlobal_DAL(input.ID_panier, input.Quantite, input.ID_produit);
+            var lignesGlobal = new LignesGlobal_DAL(input.Annee, input.Num_semaine, input.Actif);
             var depot = new LignesGlobalDepot_DAL();
             depot.Insert(lignesGlobal);
+
+            return input;
         }
         #endregion
 
         #region Update
-        public void Update(int id, LignesGlobal_DTO input)
+        public LignesGlobal_DTO Update(LignesGlobal_DTO input)
         {
-            var lignesGlobal = new LignesGlobal_DAL(id, input.ID_panier, input.Quantite, input.ID_produit);
+            var lignesGlobal = new LignesGlobal_DAL(input.ID, input.Annee, input.Num_semaine, input.Actif);
             var depot = new LignesGlobalDepot_DAL();
             depot.Update(lignesGlobal);
+
+            return input;
+        }
+        #endregion
+
+        #region UpdateActif
+        public LignesGlobal_DTO UpdateActif(LignesGlobal_DTO input)
+        {
+            var lignesGlobal = new LignesGlobal_DAL(input.ID, input.Annee, input.Num_semaine, input.Actif);
+            var depot = new LignesGlobalDepot_DAL();
+            depot.UpdateActif(lignesGlobal);
+
+            return input;
         }
         #endregion
 

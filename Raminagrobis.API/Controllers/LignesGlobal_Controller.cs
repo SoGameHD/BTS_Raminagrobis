@@ -25,9 +25,9 @@ namespace Raminagrobis.API.Controllers
             return service.GetAll().Select(item => new LignesGlobal_DTO()
             {
                 ID = item.ID,
-                Quantite = item.Quantite,
-                ID_produit = item.ID_produit,
-                ID_panier = item.ID_panier,
+                Annee = item.Annee,
+                Num_semaine = item.Num_semaine,
+                Actif = item.Actif,
             });
         }
         #endregion
@@ -41,13 +41,12 @@ namespace Raminagrobis.API.Controllers
             return new LignesGlobal_DTO()
             {
                 ID = item.ID,
-                Quantite = item.Quantite,
-                ID_produit = item.ID_produit,
-                ID_panier = item.ID_panier,
+                Annee = item.Annee,
+                Num_semaine = item.Num_semaine,
+                Actif = item.Actif,
             };
         }
         #endregion
-
 
         #region Insert
         [HttpPost]
@@ -59,10 +58,10 @@ namespace Raminagrobis.API.Controllers
 
 
         #region Update
-        [HttpPut("{id}")]
-        public void Update(int id, [FromBody] LignesGlobal_DTO item)
+        [HttpPut]
+        public void Update([FromBody] LignesGlobal_DTO item)
         {
-            service.Update(id, item);
+            service.Update(item);
         }
         #endregion
 

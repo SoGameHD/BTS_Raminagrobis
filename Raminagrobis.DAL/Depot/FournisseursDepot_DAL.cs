@@ -45,7 +45,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "SELECT ID, societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs where ID=@ID";
+            commande.CommandText = "SELECT ID, societe, civilite, nom, prenom, email, adresse, actif FROM Fournisseurs WHERE ID=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = commande.ExecuteReader();
 
@@ -118,6 +118,26 @@ namespace Raminagrobis.DAL.Depot
                 throw new Exception($"Impossible de mettre à jour le Fournisseurs d'ID : {fournisseur.ID}");
             }
 
+
+            DetruireConnexionEtCommande();
+
+            return fournisseur;
+        }
+        #endregion
+
+        #region UpdateActif
+        public Fournisseurs_DAL UpdateActif(Fournisseurs_DAL fournisseur)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE Fournisseurs SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", fournisseur.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour le fournisseur d'ID {fournisseur.ID}");
+            }
 
             DetruireConnexionEtCommande();
 

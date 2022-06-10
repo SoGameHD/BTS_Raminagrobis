@@ -1,4 +1,4 @@
-﻿<Page x:Class="Raminagrobis.WPF.Produits"
+﻿<Page x:Class="Raminagrobis.WPF.PanierDetail"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,15 +6,14 @@
       xmlns:local="clr-namespace:Raminagrobis.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="1200"
-      Title="Produits" Loaded="LoadPage">
+      Title="PanierDetail" Loaded="LoadPage">
 
     <Grid>
-        <ListView Name="lvProduits">
+        <ListView Name="lvPanierDetail">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Reference " Width="160" DisplayMemberBinding="{Binding Reference }" />
-                    <GridViewColumn Header="Libelle" Width="160" DisplayMemberBinding="{Binding Libelle}" />
-                    <GridViewColumn Header="Marque" Width="160" DisplayMemberBinding="{Binding Marque}" />
+                    <GridViewColumn Header="Num_semaine" Width="160" DisplayMemberBinding="{Binding Num_semaine}" />
+                    <GridViewColumn Header="Annee" Width="160" DisplayMemberBinding="{Binding Annee}" />
                     <GridViewColumn Header="Actif" Width="160" DisplayMemberBinding="{Binding Actif}" />
                     <GridViewColumn Header="ID" Width="160" DisplayMemberBinding="{Binding ID}" />
                 </GridView>

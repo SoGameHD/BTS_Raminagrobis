@@ -79,7 +79,7 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "INSERT INTO Adherents(societe, civilite, nom, prenom, email, date_adhesion, actif) VALUES (@Societe, @Civilite, @Nom, @Prenom, @Email, @Date_adhesion, @Actif); SELECT SCOPE_IDENTITY()";
+            commande.CommandText = "INSERT INTO Adherents (societe, civilite, nom, prenom, email, date_adhesion, actif) VALUES (@Societe, @Civilite, @Nom, @Prenom, @Email, @Date_adhesion, @Actif); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@Societe", adherent.Societe));
             commande.Parameters.Add(new SqlParameter("@Civilite", adherent.Civilite));
             commande.Parameters.Add(new SqlParameter("@Nom", adherent.Nom));
@@ -103,21 +103,40 @@ namespace Raminagrobis.DAL.Depot
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "UPDATE Adherents SET societe=@Societe, civilite=@Civilite, nom=@Nom, prenom=@Prenom, email=@Email, date_adhesion=@Date_adhesion, actif=@Actif WHERE ID=@ID";
+            commande.CommandText = "UPDATE Adherents SET societe=@Societe, civilite=@Civilite, nom=@Nom, prenom=@Prenom, email=@Email, actif=@Actif WHERE ID=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", adherent.ID));
             commande.Parameters.Add(new SqlParameter("@Societe", adherent.Societe));
             commande.Parameters.Add(new SqlParameter("@Civilite", adherent.Civilite));
             commande.Parameters.Add(new SqlParameter("@Nom", adherent.Nom));
             commande.Parameters.Add(new SqlParameter("@Prenom", adherent.Prenom));
             commande.Parameters.Add(new SqlParameter("@Email", adherent.Email));
-            commande.Parameters.Add(new SqlParameter("@Date_adhesion", adherent.Date_adhesion));
             commande.Parameters.Add(new SqlParameter("@Actif", adherent.Actif));
 
-            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+            var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
                 throw new Exception($"Impossible de mettre à jour l'Adherents d'ID : {adherent.ID}");
+            }
+
+            DetruireConnexionEtCommande();
+
+            return adherent;
+        }
+        #endregion
+
+        #region UpdateActif
+        public Adherent_DAL UpdateActif(Adherent_DAL adherent)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "UPDATE Adherents SET actif = 'false' WHERE ID = @ID";
+            commande.Parameters.Add(new SqlParameter("@ID", adherent.ID));
+            var nombreDeLignesAffectees = commande.ExecuteNonQuery();
+
+            if (nombreDeLignesAffectees != 1)
+            {
+                throw new Exception($"Impossible de mettre à jour l'adhérent d'ID {adherent.ID}");
             }
 
             DetruireConnexionEtCommande();

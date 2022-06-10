@@ -41,11 +41,10 @@ namespace Raminagrobis.WPF
             fournisseur_DTO.Prenom = InputPrenom.Text;
             fournisseur_DTO.Email = InputEmail.Text;
             fournisseur_DTO.Adresse = InputAdresse.Text;
-            fournisseur_DTO.Actif = InputActif.AcceptsReturn;
+            fournisseur_DTO.Actif = InputActif.IsChecked == null ? false : InputActif.IsChecked.Value;
 
             apiclient.FournisseursPostAsync(fournisseur_DTO);
         }
         #endregion
-
     }
 }

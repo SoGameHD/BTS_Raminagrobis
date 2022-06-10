@@ -30,6 +30,7 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
+        #region BtnAdherent
         #region BtnAdherentList
         private void BtnAdherentList(object sender, RoutedEventArgs e)
         {
@@ -87,7 +88,9 @@ namespace Raminagrobis.WPF
             }
         }
         #endregion
+        #endregion
 
+        #region BtnFournisseur
         #region BtnFournisseurList
         private void BtnFournisseurList(object sender, RoutedEventArgs e)
         {
@@ -115,7 +118,7 @@ namespace Raminagrobis.WPF
         {
             if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem == null)
             {
-                MessageBox.Show("Veuillez sélectionner un fournisseur dans la liste");
+                MessageBox.Show("Veuillez séléctionner un fournisseur dans la liste");
             }
             else
             {
@@ -146,15 +149,114 @@ namespace Raminagrobis.WPF
         }
         #endregion
 
-        #region BtnPaniersList
-        private void BtnPaniersList(object sender, RoutedEventArgs e)
+        #region BtnFournisseurReference
+        private void BtnFournisseurReference(object sender, RoutedEventArgs e)
         {
-            if (GestionnaireDeFenetres.Paniers == null)
+            if (GestionnaireDeFenetres.Fournisseur == null || GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem == null)
             {
-                GestionnaireDeFenetres.Paniers = new Paniers();
+                MessageBox.Show("Veuillez séléctionner un fournisseur dans la liste");
             }
-            Main.Navigate(GestionnaireDeFenetres.Paniers);
+            else
+            {
+                if (GestionnaireDeFenetres.Catalogue == null)
+                {
+                    GestionnaireDeFenetres.Catalogue = new Catalogue((Fournisseur_DTO)GestionnaireDeFenetres.Fournisseur.lvFournisseurs.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.Catalogue);
+            }
         }
+        #endregion
+        #endregion
+
+        #region BtnProduit
+        #region BtnProduitList
+        private void BtnProduitList(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null)
+            {
+                GestionnaireDeFenetres.Produits = new Produits();
+            }
+            Main.Navigate(GestionnaireDeFenetres.Produits);
+        }
+        #endregion
+
+        #region BtnProduitInsert
+        private void BtnProduitInsert(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.ProduitsInsert == null)
+            {
+                GestionnaireDeFenetres.ProduitsInsert = new ProduitsInsert();
+            }
+            Main.Navigate(GestionnaireDeFenetres.ProduitsInsert);
+        }
+        #endregion
+
+        #region BtnProduitUpdate
+        private void BtnProduitUdpate(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null || GestionnaireDeFenetres.Produits.lvProduits.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez séléctionner un produit dans la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.ProduitsUpdate == null)
+                {
+                    GestionnaireDeFenetres.ProduitsUpdate = new ProduitsUpdate((Produits_DTO)GestionnaireDeFenetres.Produits.lvProduits.SelectedItem);
+                }
+                Main.Navigate(GestionnaireDeFenetres.ProduitsUpdate);
+            }
+        }
+        #endregion
+
+        #region BtnProduitDelete
+        private void BtnProduitDelete(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Produits == null || GestionnaireDeFenetres.Produits.lvProduits == null)
+            {
+                MessageBox.Show("Veuillez afficher la liste des produits");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.ProduitsDelete == null)
+                {
+                    GestionnaireDeFenetres.ProduitsDelete = new ProduitsDelete();
+                }
+                Main.Navigate(GestionnaireDeFenetres.ProduitsDelete);
+            }
+        }
+        #endregion
+        #endregion
+
+        #region Panier
+        #region BtnPanierList
+        private void BtnPanierList(object sender, RoutedEventArgs e)
+        {
+            if (GestionnaireDeFenetres.Panier == null)
+            {
+                GestionnaireDeFenetres.Panier = new Panier();
+            }
+            Main.Navigate(GestionnaireDeFenetres.Panier);
+        }
+        #endregion
+
+        #region BtnPanierDetail
+        private void BtnPanierDetail(object sender, RoutedEventArgs e)
+        {
+            if(GestionnaireDeFenetres.Panier == null || GestionnaireDeFenetres.Panier.lvPanier.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez séléctionner un panier de la liste");
+            }
+            else
+            {
+                if (GestionnaireDeFenetres.PanierDetail == null)
+                {
+                    GestionnaireDeFenetres.PanierDetail = new PanierDetail();
+                }
+                Main.Navigate(GestionnaireDeFenetres.PanierDetail);
+            }
+        }
+        #endregion
         #endregion
     }
 }

@@ -43,7 +43,7 @@ namespace Raminagrobis.DAL.Depot
         #endregion
 
         #region GetByID_produit
-        public Liaison_DAL GetByID_produit(int ID_produit)
+        public List<Liaison_DAL> GetByID_produit(int ID_produit)
         {
             CreerConnexionEtCommande();
 
@@ -51,22 +51,19 @@ namespace Raminagrobis.DAL.Depot
             commande.Parameters.Add(new SqlParameter("@ID_produit", ID_produit));
             var reader = commande.ExecuteReader();
 
-            Liaison_DAL liaison;
+            var listeLiaison = new List<Liaison_DAL>();
 
-            if (reader.Read())
+            while (reader.Read())
             {
-                liaison = new Liaison_DAL(reader.GetInt16(0),
-                                        reader.GetInt16(1)
+                var liaison = new Liaison_DAL(reader.GetInt32(0),
+                                        reader.GetInt32(1)
                                         );
-            }
-            else
-            {
-                throw new Exception($"Aucune occurance à l'ID produit {ID_produit} dans la table Liaison");
+                listeLiaison.Add(liaison);
             }
 
             DetruireConnexionEtCommande();
 
-            return liaison;
+            return listeLiaison;
         }
         #endregion
 
@@ -106,10 +103,7 @@ namespace Raminagrobis.DAL.Depot
             commande.CommandText = "INSERT INTO Liaison (id_produit, id_fournisseur) VALUES (@ID_produit, @ID_fournisseur); SELECT SCOPE_IDENTITY()";
             commande.Parameters.Add(new SqlParameter("@ID_produit", liaison.ID_produit));
             commande.Parameters.Add(new SqlParameter("@ID_fournisseur", liaison.ID_fournisseur));
-            var ID_produit = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            var ID_fournisseur = Convert.ToInt32((decimal)commande.ExecuteScalar());
-            liaison.ID_produit = ID_produit;
-            liaison.ID_fournisseur = ID_fournisseur;
+            commande.ExecuteNonQuery();
 
             DetruireConnexionEtCommande();
 

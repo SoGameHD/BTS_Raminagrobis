@@ -64,10 +64,10 @@ namespace Raminagrobis.API.Controllers
         #endregion
 
         #region Update
-        [HttpPut("{id}")]
-        public void Update (int id, [FromBody] Fournisseur_DTO item)
+        [HttpPut]
+        public void Update ([FromBody] Fournisseur_DTO item)
         {
-            service.Update(id, item);
+            service.Update(item);
         }
         #endregion
 
@@ -76,6 +76,14 @@ namespace Raminagrobis.API.Controllers
         public void Delete( int id)
         {
             service.Delete(id);
+        }
+        #endregion
+
+        #region GetListProduitsByFournisseur
+        [HttpPost("catalogue/{id}")]
+        public void GetListProduitsByFournisseur(int id, List<string> csv_file)
+        {
+            service.GetListProduitsByFournisseur(id, csv_file);
         }
         #endregion
     }
